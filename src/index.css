@@ -1,0 +1,44 @@
+/* Pick Word — global reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: #F5EFE0;
+  /* Prevent iOS elastic overscroll from showing white */
+  overscroll-behavior: none;
+}
+
+/* Hide scrollbars globally (app uses overflow: hidden or custom scroll areas) */
+::-webkit-scrollbar { width: 0; height: 0; }
+
+/* iOS safe area insets — push content below the notch / Dynamic Island */
+#root {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Tap highlight — remove the grey flash on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent text selection on interactive elements */
+button, label {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+input, textarea {
+  font-family: 'Nunito', sans-serif;
+}
+
+input[type="date"] {
+  color-scheme: light;
+}
