@@ -16,7 +16,7 @@ export default defineConfig({
         name: 'Pick Word',
         short_name: 'Pick Word',
         description: 'Daily vocabulary practice for kids — flashcards, challenges, and writing lists',
-        start_url: 'https://github.com/namnhatdoan/pick-word',
+        start_url: 'https://namnhatdoan.github.com/pick-word',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#F5EFE0',
