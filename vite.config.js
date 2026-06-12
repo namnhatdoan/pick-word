@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  base: 'pick-word',
   plugins: [
     react(),
     VitePWA({
@@ -16,7 +17,7 @@ export default defineConfig({
         name: 'Pick Word',
         short_name: 'Pick Word',
         description: 'Daily vocabulary practice for kids — flashcards, challenges, and writing lists',
-        start_url: 'https://namnhatdoan.github.com/pick-word',
+        start_url: '/',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#F5EFE0',
