@@ -1,0 +1,46 @@
+{
+  "words": [
+    {
+      "word": "future",
+      "meaning": "The time that has not happened yet.",
+      "topics": ["S-English"],
+      "color": "#FFD580",
+      "img": ""
+    },
+    {
+      "word": "damage",
+      "meaning": "Harm or something broken.",
+      "topics": ["S-English"],
+      "color": "#FFD580",
+      "img": ""
+    },
+    {
+      "word": "dinosaur",
+      "meaning": "A very large animal that lived long ago.",
+      "topics": ["S-English"],
+      "color": "#FFD580",
+      "img": "https://i.pinimg.com/736x/50/95/19/509519f000b116bc5174a2d2c95f7304.jpg"
+    },
+    {
+      "word": "condition",
+      "meaning": "The way something is or feels.",
+      "topics": ["S-English"],
+      "color": "#FFD580",
+      "img": ""
+    },
+    {
+      "word": "passengers",
+      "meaning": "People traveling in a car, bus, train, or plane.",
+      "topics": ["S-English"],
+      "color": "#FFD580",
+      "img": ""
+    },
+    {
+      "word": "theater",
+      "meaning": "A place where people watch plays or shows.",
+      "topics": ["S-English"],
+      "color": "#FFD580",
+      "img": "https://i.pinimg.com/736x/37/a2/f8/37a2f891a4ede77f68fd97590697f64f.jpg"
+    }
+  ]
+}

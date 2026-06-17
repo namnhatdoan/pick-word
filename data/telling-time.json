@@ -1,0 +1,53 @@
+{
+  "words": [
+    {
+      "word": "analog clock",
+      "meaning": "A clock with hands that show the hour and minutes.",
+      "topics": ["S-Math"],
+      "color": "#80C9FF",
+      "img": "https://i.pinimg.com/736x/4d/cb/90/4dcb90904bedb25b40cf70155ef7034c.jpg"
+    },
+    {
+      "word": "digital clock",
+      "meaning": "A clock that shows time using numbers.",
+      "topics": ["S-Math"],
+      "color": "#80C9FF",
+      "img": "https://i.pinimg.com/736x/d3/ee/b8/d3eeb858712fd3696482370e0a13a321.jpg"
+    },
+    {
+      "word": "hour hand",
+      "meaning": "The short hand on a clock that shows the hour.",
+      "topics": ["S-Math"],
+      "color": "#80C9FF",
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRLiQsHhG2-URFY89OshoicNtdGBV00vQS1HnQ81Q33tfBN8c63PNXRcpO&s=10"
+    },
+    {
+      "word": "minute hand",
+      "meaning": "The long hand on a clock that shows the minutes.",
+      "topics": ["S-Math"],
+      "color": "#80C9FF",
+      "img": "https://i.pinimg.com/736x/4d/cb/90/4dcb90904bedb25b40cf70155ef7034c.jpg"
+    },
+    {
+      "word": "second hand",
+      "meaning": "The hand on a clock that measures 60 seconds in each minute.",
+      "topics": ["S-Math"],
+      "color": "#80C9FF",
+      "img": "https://i.pinimg.com/736x/4d/cb/90/4dcb90904bedb25b40cf70155ef7034c.jpg"
+    },
+    {
+      "word": "minute",
+      "meaning": "A unit of time. It's equal to 60 seconds",
+      "topics": ["S-Math"],
+      "color": "#80C9FF",
+      "img": ""
+    },
+    {
+      "word": "hour",
+      "meaning": "A unit of time. It's equal to 60 minutes",
+      "topics": ["S-Math"],
+      "color": "#80C9FF",
+      "img": ""
+    }
+  ]
+}
