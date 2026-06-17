@@ -42,6 +42,7 @@ const SEED_WORDS = [
 
 const DEFAULT_WORDS_PER_SESSION = 10;
 const DEFAULT_TEST_POOL_SIZE    = 15;
+const DEFAULT_AVOID_REPEAT_DAYS = 3;
 
 // ─── Image → base64 at 400px ──────────────────────────────────────────────────
 // Fetches a URL, draws it onto a 400px-wide canvas, returns a JPEG data URI.
@@ -84,12 +85,36 @@ function getTopicColor(topic, allTopics) {
   return TOPIC_PALETTE[((idx >= 0 ? idx : allTopics.length) % TOPIC_PALETTE.length)];
 }
 
-// Only words with learnedAt set are eligible for sessions
-function pickWords(allWords, doneIds, count) {
-  const eligible = allWords.filter(w => w.learnedAt !== null);
-  const notDone = eligible.filter(w => !doneIds.includes(w.id));
-  const pool = notDone.length >= count ? notDone : eligible;
-  return [...pool].sort(() => Math.random() - 0.5).slice(0, Math.min(count, pool.length));
+// Only words with learnedAt set are eligible for sessions.
+// Picks `count` words, preferring ones not seen in the last N days (excludeIds).
+// Falls back to the full eligible pool if not enough "fresh" words remain.
+// Sorted by score descending (needs-more-practice first); equal scores are
+// shuffled randomly (Array.sort is a stable sort, so the random pre-shuffle
+// order is preserved among ties).
+function pickWords(allWords, excludeIds, count) {
+  const eligible  = allWords.filter(w => w.learnedAt !== null);
+  const notRecent = eligible.filter(w => !excludeIds.has(w.id));
+  const pool      = notRecent.length >= count ? notRecent : eligible;
+  return [...pool]
+    .sort(() => Math.random() - 0.5)
+    .sort((a, b) => (b.score ?? 50) - (a.score ?? 50))
+    .slice(0, Math.min(count, pool.length));
+}
+
+// Builds the set of word IDs that appeared in any written-practice session
+// within the last `avoidDays` days. Used to avoid repeats. avoidDays <= 0
+// disables the check entirely (returns an empty set).
+function getRecentWordIds(writtenHistory, avoidDays) {
+  const ids = new Set();
+  if (avoidDays > 0) {
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - avoidDays);
+    const cutoffStr = cutoff.toISOString().slice(0, 10);
+    writtenHistory.forEach(s => {
+      if (s.date >= cutoffStr) (s.words || []).forEach(w => ids.add(w.id));
+    });
+  }
+  return ids;
 }
 
 // ─── Shared helpers ───────────────────────────────────────────────────────────
@@ -247,7 +272,7 @@ function DoneOverlay({ count, onNewList }) {
       <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 28, fontWeight: 900, color: "#fff", letterSpacing: -0.8, marginBottom: 8, textAlign: "center" }}>All written!</div>
       <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 14, color: "rgba(255,255,255,0.45)", textAlign: "center", marginBottom: 32, lineHeight: 1.6 }}>Great job practicing {count} words today.</div>
       <button onClick={onNewList} style={{ padding: "0 36px", height: 56, borderRadius: 18, background: "#C4943A", border: "none", color: "#fff", fontFamily: "'Nunito',sans-serif", fontSize: 16, fontWeight: 800, cursor: "pointer", boxShadow: "0 8px 28px rgba(196,148,58,0.5)", display: "flex", alignItems: "center", gap: 10 }}>
-        Next Practice <span style={{ fontSize: 20 }}>🔀</span>
+        Get New List <span style={{ fontSize: 20 }}>🔀</span>
       </button>
     </div>
   );
@@ -256,36 +281,54 @@ function DoneOverlay({ count, onNewList }) {
 // ─── Test screen ─────────────────────────────────────────────────────────────
 // TEST_POOL_SIZE and WORDS_PER_SESSION come from app config (loaded from IDB)
 
-function TestScreen({ testWords, allTopics, onClose, onComplete, max_wrong }) {
-  const [idx, setIdx]               = useState(0);
+function TestScreen({ testWords, allTopics, onClose, onComplete, onSaveProgress, initialState }) {
+  const [idx, setIdx]               = useState(initialState?.idx ?? 0);
   const [input, setInput]           = useState("");
-  const [submitted, setSubmitted]   = useState(false);
-  const [results, setResults]       = useState([]); // [{word, correct, attempt}]
+  // Restore submitted=true if backed out mid-flip (answered but not yet tapped Next)
+  const [submitted, setSubmitted]   = useState(initialState?.submitted ?? false);
+  const [results, setResults]       = useState(initialState?.results ?? []);
   const [imgError, setImgError]     = useState(false);
   const [showSummary, setShowSummary] = useState(false);
   const inputRef = useRef(null);
+  const isFirstMount = useRef(true);
 
   const wrongSoFar = results.filter(r => !r.correct).length;
   const cur        = testWords[idx];
   const primaryColor = cur?.color || getTopicColor((cur?.topics||[])[0]||"", allTopics);
 
+  // Skip the reset on first mount — resuming may have submitted=true already
   useEffect(() => {
+    if (isFirstMount.current) { isFirstMount.current = false; return; }
     setInput(""); setSubmitted(false); setImgError(false);
     setTimeout(() => inputRef.current?.focus(), 80);
   }, [idx]);
 
+  // Focus input only on fresh start
+  useEffect(() => {
+    if (!initialState) setTimeout(() => inputRef.current?.focus(), 80);
+  }, []); // eslint-disable-line
+
   const handleSubmit = () => {
     if (!input.trim() || submitted) return;
     const correct    = input.trim().toLowerCase() === cur.word.toLowerCase();
+    const newResults = [...results, { word: cur, correct, attempt: input.trim() }];
     setSubmitted(true);
-    setResults(r => [...r, { word: cur, correct, attempt: input.trim() }]);
+    setResults(newResults);
+    // Save with submitted:true so if user backs out now, resume shows the flipped result
+    onSaveProgress?.({ idx, submitted: true, results: newResults, testWordIds: testWords.map(w => w.id) });
   };
 
   const handleNext = () => {
-    const newWrong = results.filter(r => !r.correct).length;
-    const isLast   = idx >= testWords.length - 1;
-    if (newWrong >= max_wrong || isLast) setShowSummary(true);
-    else setIdx(i => i + 1);
+    const isLast = idx >= testWords.length - 1;
+    if (isLast) {
+      onSaveProgress?.(null); // clear — challenge complete
+      setShowSummary(true);
+    } else {
+      const nextIdx = idx + 1;
+      setIdx(nextIdx);
+      // Save next word as unanswered
+      onSaveProgress?.({ idx: nextIdx, submitted: false, results, testWordIds: testWords.map(w => w.id) });
+    }
   };
 
   const wrongResults  = results.filter(r => !r.correct);
@@ -295,8 +338,7 @@ function TestScreen({ testWords, allTopics, onClose, onComplete, max_wrong }) {
 
   // ── Summary ──────────────────────────────────────────────────────────────
   if (showSummary) {
-    const allCorrect    = wrongResults.length === 0;
-    const stoppedEarly  = wrongResults.length >= max_wrong;
+    const allCorrect = wrongResults.length === 0;
     return (
       <div style={{ position: "fixed", inset: 0, background: "#1A1208", display: "flex", flexDirection: "column", zIndex: 100, animation: "fadeIn 0.3s ease" }}>
         <div style={{ padding: "36px 28px 20px", textAlign: "center", flexShrink: 0 }}>
@@ -309,9 +351,7 @@ function TestScreen({ testWords, allTopics, onClose, onComplete, max_wrong }) {
           <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 13, color: "rgba(255,255,255,0.45)", marginTop: 6, lineHeight: 1.6 }}>
             {allCorrect
               ? "Perfect! Nothing extra to write today 🎉"
-              : stoppedEarly
-                ? `Stopped at ${max_wrong} wrong answers. Practice these ${max_wrong} words today.`
-                : `Practice ${wrongResults.length} word${wrongResults.length !== 1 ? "s" : ""} today.`}
+              : `Practice ${wrongResults.length} word${wrongResults.length !== 1 ? "s" : ""} today.`}
           </div>
         </div>
 
@@ -386,7 +426,7 @@ function TestScreen({ testWords, allTopics, onClose, onComplete, max_wrong }) {
             <span style={{ marginLeft: 10, fontSize: 12 }}>
               <span style={{ color: "#5A9E8A" }}>✓ {correctCount}</span>
               <span style={{ color: "rgba(255,255,255,0.2)", margin: "0 4px" }}>·</span>
-              <span style={{ color: wrongSoFar > 0 ? "#D45A5A" : "rgba(255,255,255,0.3)" }}>✗ {wrongSoFar}/{max_wrong}</span>
+              <span style={{ color: wrongSoFar > 0 ? "#D45A5A" : "rgba(255,255,255,0.3)" }}>✗ {wrongSoFar}</span>
             </span>
           </div>
           <div style={{ fontFamily: "'Nunito',sans-serif", color: "rgba(255,255,255,0.35)", fontSize: 11 }}>
@@ -395,18 +435,6 @@ function TestScreen({ testWords, allTopics, onClose, onComplete, max_wrong }) {
         </div>
         <div style={{ width: 40 }} />
       </div>
-
-      {/* Wrong-answer bar */}
-      {wrongSoFar > 0 && (
-        <div style={{ width: "100%", maxWidth: 460, marginBottom: 10 }}>
-          <div style={{ height: 4, background: "rgba(255,255,255,0.06)", borderRadius: 4, overflow: "hidden" }}>
-            <div style={{ width: `${(wrongSoFar / max_wrong) * 100}%`, height: "100%", background: wrongSoFar >= max_wrong - 2 ? "#D45A5A" : "#C4943A", borderRadius: 4, transition: "width 0.4s ease, background 0.3s" }} />
-          </div>
-          <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 10, color: wrongSoFar >= max_wrong - 2 ? "#D45A5A" : "rgba(255,255,255,0.25)", textAlign: "right", marginTop: 3 }}>
-            {max_wrong - wrongSoFar} mistake{max_wrong - wrongSoFar !== 1 ? "s" : ""} left before stopping
-          </div>
-        </div>
-      )}
 
       {/* Progress bar */}
       <div style={{ width: "100%", maxWidth: 460, height: 3, background: "rgba(255,255,255,0.08)", borderRadius: 4, marginBottom: 18, overflow: "hidden" }}>
@@ -470,8 +498,10 @@ function TestScreen({ testWords, allTopics, onClose, onComplete, max_wrong }) {
               Check Answer →
             </button>
             <button onClick={() => {
+              const newResults = [...results, { word: cur, correct: false, attempt: "—skipped—" }];
               setSubmitted(true);
-              setResults(r => [...r, { word: cur, correct: false, attempt: "—skipped—" }]);
+              setResults(newResults);
+              onSaveProgress?.({ idx, submitted: true, results: newResults, testWordIds: testWords.map(w => w.id) });
             }}
               style={{ flex: 1, height: 54, borderRadius: 18, background: "rgba(255,255,255,0.06)", border: "1.5px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.45)", fontFamily: "'Nunito',sans-serif", fontSize: 14, fontWeight: 700, cursor: "pointer", transition: "all 0.2s" }}
               onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.12)"; e.currentTarget.style.color = "rgba(255,255,255,0.7)"; }}
@@ -481,7 +511,7 @@ function TestScreen({ testWords, allTopics, onClose, onComplete, max_wrong }) {
         ) : (
           <button onClick={handleNext}
             style={{ width: "100%", height: 54, borderRadius: 18, background: lastResult?.correct ? "#5A9E8A" : "#C4943A", border: "none", color: "#fff", fontFamily: "'Nunito',sans-serif", fontSize: 16, fontWeight: 800, cursor: "pointer", animation: "popIn 0.3s ease" }}>
-            {wrongSoFar >= max_wrong ? "See results →" : idx < testWords.length - 1 ? "Next →" : "See results 🎉"}
+            {idx < testWords.length - 1 ? "Next →" : "See results 🎉"}
           </button>
         )}
       </div>
@@ -519,10 +549,10 @@ function WordCard({ word, index, onOpen, allTopics }) {
 }
 
 // ─── Child page ───────────────────────────────────────────────────────────────
-function ChildPage({ allWords, allTopics, onGoParent, dbSession, onUpdateWord, config }) {
+function ChildPage({ allWords, allTopics, onGoParent, dbSession, onUpdateWord, config, writtenHistory, onLogWrittenSession }) {
   const WORDS_PER_SESSION = config?.wordsPerSession ?? DEFAULT_WORDS_PER_SESSION;
   const TEST_POOL_SIZE    = config?.testPoolSize    ?? DEFAULT_TEST_POOL_SIZE;
-  const [doneIds, setDoneIds]       = useState([]);
+  const AVOID_REPEAT_DAYS = config?.avoidRepeatDays ?? DEFAULT_AVOID_REPEAT_DAYS;
   const [session, setSession]       = useState([]);
   const [sessionCount, setSessionCount] = useState(1);
   const [sessionReady, setSessionReady] = useState(false);
@@ -531,13 +561,15 @@ function ChildPage({ allWords, allTopics, onGoParent, dbSession, onUpdateWord, c
   const [currentIndex, setCurrentIndex]   = useState(0);
   const [filter, setFilter]         = useState("All");
   const [showDone, setShowDone]     = useState(false);
-  const [view, setView]             = useState("home"); // "home" | "wordlist"
+  const [perfectScore, setPerfectScore] = useState(false); // true after a flawless Challenge
+  const [view, setView]             = useState("home"); // set to "wordlist" after session restore if words exist
+  const [resumeChallenge, setResumeChallenge] = useState(null); // {idx, results, testWords} for in-progress challenge
 
   // ── Restore session from IDB on mount ──
   useEffect(() => {
     (async () => {
       try {
-        const saved = await dbSession.getSession("childSession");
+        const saved = await dbSession.getSession(KEY_CHILD_SESSION);
         const todayStr = new Date().toISOString().slice(0, 10);
         if (saved && saved.date === todayStr && saved.sessionIds?.length > 0) {
           // Rehydrate: map saved IDs back to current word objects (handles edits)
@@ -545,42 +577,104 @@ function ChildPage({ allWords, allTopics, onGoParent, dbSession, onUpdateWord, c
           const rehydrated = saved.sessionIds.map(id => wordMap[id]).filter(Boolean);
           if (rehydrated.length > 0) {
             setSession(rehydrated);
-            setDoneIds(saved.doneIds || []);
             setSessionCount(saved.sessionCount || 1);
+            setPerfectScore(saved.perfectScore || false);
+            // Only resume the practice page if the child had actually entered it
+            setView(saved.view === "wordlist" ? "wordlist" : "home");
             setSessionReady(true);
             return;
           }
         }
-        // No valid session for today → pick fresh
-        const fresh = pickWords(allWords, [], WORDS_PER_SESSION);
+        // No valid session for today → pick fresh, start on the selection page
+        const recentIds = getRecentWordIds(writtenHistory, AVOID_REPEAT_DAYS);
+        const fresh = pickWords(allWords, recentIds, WORDS_PER_SESSION);
         setSession(fresh);
-        await dbSession.putSession("childSession", {
+        setView("home");
+        await dbSession.putSession(KEY_CHILD_SESSION, {
           date: todayStr,
           sessionIds: fresh.map(w => w.id),
-          doneIds: [],
           sessionCount: 1,
+          view: "home",
+          perfectScore: false,
         });
       } catch (err) {
         console.error("Session restore failed", err);
-        setSession(pickWords(allWords, [], WORDS_PER_SESSION));
+        setSession(pickWords(allWords, new Set(), WORDS_PER_SESSION));
+        setView("home");
       } finally {
+        // Restore in-progress challenge if one exists for today
+        try {
+          const saved = await dbSession.getSession(KEY_CHALLENGE);
+          if (saved && saved.date === new Date().toISOString().slice(0, 10) && saved.testWordIds?.length > 0) {
+            const wordMap = Object.fromEntries(allWords.map(w => [w.id, w]));
+            const testWords = saved.testWordIds.map(id => wordMap[id]).filter(Boolean);
+            if (testWords.length > 0) {
+              setResumeChallenge({
+                idx:       saved.idx ?? 0,
+                submitted: saved.submitted ?? false,
+                results:   saved.results ?? [],
+                testWords,
+              });
+            }
+          }
+        } catch { /* no saved challenge */ }
         setSessionReady(true);
       }
     })();
   }, []); // run once on mount only
 
-  const saveSession = useCallback(async (sessionIds, doneIds, count) => {
+  const saveSession = useCallback(async (sessionIds, count, view, perfectScore) => {
     try {
-      await dbSession.putSession("childSession", {
+      await dbSession.putSession(KEY_CHILD_SESSION, {
         date: new Date().toISOString().slice(0, 10),
         sessionIds,
-        doneIds,
         sessionCount: count,
+        view,
+        perfectScore: !!perfectScore,
       });
     } catch (err) {
       console.error("Session save failed", err);
     }
   }, [dbSession]);
+
+  // Persist just the current view/perfectScore without changing the word list
+  const saveViewState = useCallback(async (nextView, nextPerfect) => {
+    try {
+      const saved = await dbSession.getSession(KEY_CHILD_SESSION);
+      await dbSession.putSession(KEY_CHILD_SESSION, {
+        ...(saved || {}),
+        date: new Date().toISOString().slice(0, 10),
+        sessionIds: session.map(w => w.id),
+        sessionCount,
+        view: nextView,
+        perfectScore: !!nextPerfect,
+      });
+    } catch (err) {
+      console.error("Session view save failed", err);
+    }
+  }, [dbSession, session, sessionCount]);
+
+  const saveChallengeProgress = useCallback(async (state) => {
+    try {
+      if (state === null) {
+        await dbSession.putSession(KEY_CHALLENGE, { date: "", testWordIds: [] });
+        setResumeChallenge(null);
+      } else {
+        const record = {
+          date: new Date().toISOString().slice(0, 10),
+          idx:         state.idx,
+          submitted:   state.submitted ?? false,
+          results:     state.results,
+          testWordIds: state.testWordIds,
+        };
+        await dbSession.putSession(KEY_CHALLENGE, record);
+        // Keep resumeChallenge in sync so the card appears if user closes overlay mid-session
+        const wordMap = Object.fromEntries(allWords.map(w => [w.id, w]));
+        const testWords = state.testWordIds.map(id => wordMap[id]).filter(Boolean);
+        setResumeChallenge({ idx: state.idx, submitted: state.submitted ?? false, results: state.results, testWords });
+      }
+    } catch { /* non-critical */ }
+  }, [dbSession, allWords]);
 
   const dateStr = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
   const eligibleCount = allWords.filter(w => w.learnedAt !== null).length;
@@ -589,29 +683,28 @@ function ChildPage({ allWords, allTopics, onGoParent, dbSession, onUpdateWord, c
   const filteredWords = filter === "All" ? session : session.filter(w => (w.topics || []).includes(filter));
 
   const getNewList = async () => {
-    // Log written session before cycling
-    await dbSession.addWrittenSession({
-      id: Date.now(),
-      date: new Date().toISOString().slice(0, 10),
-      words: session.map(w => ({ id: w.id, word: w.word })),
-    });
-    const newDone = [...doneIds, ...session.map(w => w.id)];
-    const eligible = allWords.filter(w => w.learnedAt !== null);
-    const nextDone = newDone.length >= eligible.length ? [] : newDone;
-    const nextSession = pickWords(allWords, nextDone, WORDS_PER_SESSION);
+    // Log written session before cycling (skip if this was a perfect-score "nothing to write" state)
+    let history = writtenHistory;
+    if (!perfectScore) {
+      const record = await onLogWrittenSession(session.map(w => ({ id: w.id, word: w.word })));
+      history = [...writtenHistory, record];
+    }
+    const recentIds = getRecentWordIds(history, AVOID_REPEAT_DAYS);
+    const nextSession = pickWords(allWords, recentIds, WORDS_PER_SESSION);
     const nextCount = sessionCount + 1;
-    setDoneIds(nextDone);
     setSession(nextSession);
     setSessionCount(nextCount);
     setFilter("All");
     setShowDone(false);
-    await saveSession(nextSession.map(w => w.id), nextDone, nextCount);
+    setPerfectScore(false);
+    setView("home"); // always return to selection after completing a set
+    await saveSession(nextSession.map(w => w.id), nextCount, "home", false);
   };
 
-  // Build test pool: top TEST_POOL_SIZE eligible words by score descending
-  const testPool = [...allWords.filter(w => w.learnedAt !== null)]
-    .sort((a, b) => (b.score ?? 50) - (a.score ?? 50))
-    .slice(0, TEST_POOL_SIZE);
+  // Build test pool: prefer eligible words not seen recently, sorted by score
+  // descending (needs-more-practice first), random tiebreak for equal scores.
+  const recentForTest = getRecentWordIds(writtenHistory, AVOID_REPEAT_DAYS);
+  const testPool = pickWords(allWords, recentForTest, TEST_POOL_SIZE);
 
   // Save test results: update score, log history, set session to wrong-answer words
   const handleTestComplete = useCallback(async (results, practiceWords) => {
@@ -639,25 +732,27 @@ function ChildPage({ allWords, allTopics, onGoParent, dbSession, onUpdateWord, c
     // Replace today's session with just the words the child got wrong
     if (practiceWords.length > 0) {
       setSession(practiceWords);
-      await saveSession(practiceWords.map(w => w.id), doneIds, sessionCount);
+      setPerfectScore(false);
       setView("wordlist");
+      await saveSession(practiceWords.map(w => w.id), sessionCount, "wordlist", false);
     } else {
-      setShowDone(true);
+      // Perfect score — show congrats on the practice page
+      setPerfectScore(true);
+      setView("wordlist");
+      await saveSession(session.map(w => w.id), sessionCount, "wordlist", true);
     }
+    setResumeChallenge(null);
     setTestOpen(false);
-  }, [allWords, onUpdateWord, dbSession, doneIds, sessionCount, saveSession]);
+  }, [allWords, onUpdateWord, dbSession, sessionCount, session, saveSession]);
 
   if (!sessionReady) return null;
 
-  // ── Shared dark header ────────────────────────────────────────────────────
-  const Header = ({ showBack, onBack: onBackBtn }) => (
+  // ── Shared header (no back button — home and wordlist are one logical page) ──
+  const Header = () => (
     <div style={{ background: "#2A2015", padding: "28px 24px 24px", position: "relative", overflow: "hidden" }}>
       {[...Array(6)].map((_, i) => (
         <div key={i} style={{ position: "absolute", width: [60,40,80,30,50,70][i], height: [60,40,80,30,50,70][i], borderRadius: "50%", background: ["#D4716A","#7C9885","#C4943A","#6A8FD4","#B07FBF","#5A9E8A"][i] + "16", top: ["-20px","30px","-10px","50px","10px","40px"][i], right: ["20px","80px","140px","40px","200px","160px"][i] }} />
       ))}
-      {showBack
-        ? <button onClick={onBackBtn} style={{ position: "absolute", top: 24, left: 24, zIndex: 10, background: "rgba(255,255,255,0.1)", border: "1.5px solid rgba(255,255,255,0.18)", borderRadius: 12, color: "rgba(255,255,255,0.6)", width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 16 }}>←</button>
-        : null}
       <button onClick={onGoParent} title="Parent settings" style={{ position: "absolute", top: 24, right: 24, zIndex: 10, background: "rgba(255,255,255,0.1)", border: "1.5px solid rgba(255,255,255,0.18)", borderRadius: 12, color: "rgba(255,255,255,0.6)", width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 16 }}>⚙️</button>
       <div style={{ position: "relative", zIndex: 1 }}>
         <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 22, fontWeight: 900, color: "#fff", letterSpacing: -0.5, marginBottom: 4 }}>Pick Word ✏️</div>
@@ -666,11 +761,11 @@ function ChildPage({ allWords, allTopics, onGoParent, dbSession, onUpdateWord, c
     </div>
   );
 
-  // ── view: "home" | "wordlist" ─────────────────────────────────────────────
+  // ── view: "home" (selection) ──────────────────────────────────────────────
   if (view === "home") {
     return (
       <div style={{ minHeight: "100vh", background: "#F5EFE0" }}>
-        <Header showBack={false} />
+        <Header />
 
         {session.length === 0 ? (
           <div style={{ padding: 32, textAlign: "center" }}>
@@ -680,7 +775,6 @@ function ChildPage({ allWords, allTopics, onGoParent, dbSession, onUpdateWord, c
           </div>
         ) : (
           <div style={{ padding: "32px 24px 40px", display: "flex", flexDirection: "column", gap: 16, animation: "fadeSlideIn 0.4s ease" }}>
-            {/* Greeting */}
             <div style={{ textAlign: "center", marginBottom: 8 }}>
               <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 20, fontWeight: 900, color: "#2A2015" }}>What would you like to do?</div>
               <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 13, color: "#B0A080", marginTop: 4 }}>
@@ -688,16 +782,41 @@ function ChildPage({ allWords, allTopics, onGoParent, dbSession, onUpdateWord, c
               </div>
             </div>
 
+            {/* Resume Challenge card — only shown if there's an in-progress challenge */}
+            {resumeChallenge && (
+              <button onClick={() => setTestOpen(true)}
+                style={{ width: "100%", borderRadius: 24, border: "2px solid #6A8FD4", background: "rgba(106,143,212,0.08)", padding: "20px 24px", cursor: "pointer", textAlign: "left", transition: "transform 0.18s, box-shadow 0.18s", animation: "fadeSlideIn 0.35s ease" }}
+                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 28px rgba(106,143,212,0.2)"; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                  <div style={{ fontSize: 32, flexShrink: 0 }}>▶️</div>
+                  <div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 17, fontWeight: 900, color: "#4A6AB4", marginBottom: 3 }}>Resume Challenge</div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 12, color: "#8A8AAA", lineHeight: 1.5 }}>
+                      {resumeChallenge.idx} of {resumeChallenge.testWords.length} words done
+                      · {resumeChallenge.results.filter(r => r.correct).length} correct
+                      · {resumeChallenge.results.filter(r => !r.correct).length} wrong
+                    </div>
+                  </div>
+                </div>
+              </button>
+            )}
+
             {/* Challenge card */}
-            <button onClick={() => setTestOpen(true)} disabled={testPool.length === 0}
+            <button onClick={() => { setResumeChallenge(null); saveChallengeProgress(null); setTestOpen(true); }} disabled={testPool.length === 0}
               style={{ width: "100%", borderRadius: 24, border: "none", background: testPool.length === 0 ? "#D8D0C0" : "linear-gradient(135deg,#6A8FD4,#4A6AB4)", padding: "28px 24px", cursor: testPool.length === 0 ? "default" : "pointer", textAlign: "left", boxShadow: testPool.length === 0 ? "none" : "0 12px 36px rgba(106,143,212,0.4)", transition: "transform 0.18s, box-shadow 0.18s" }}
               onMouseEnter={e => { if (testPool.length > 0) { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 18px 42px rgba(106,143,212,0.5)"; }}}
               onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = testPool.length > 0 ? "0 12px 36px rgba(106,143,212,0.4)" : "none"; }}
             >
               <div style={{ fontSize: 36, marginBottom: 10 }}>🏆</div>
-              <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 20, fontWeight: 900, color: "#fff", marginBottom: 6 }}>Challenge</div>
+              <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 20, fontWeight: 900, color: "#fff", marginBottom: 6 }}>
+                {resumeChallenge ? "New Challenge" : "Challenge"}
+              </div>
               <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 13, color: "rgba(255,255,255,0.7)", lineHeight: 1.5 }}>
-                Test yourself on up to {TEST_POOL_SIZE} words. Only the ones you get wrong become today's writing practice.
+                {resumeChallenge
+                  ? "Start fresh — discards your current progress"
+                  : `Test yourself on up to ${TEST_POOL_SIZE} words. Only the ones you get wrong become today's writing practice.`}
               </div>
               {testPool.length > 0 && (
                 <div style={{ marginTop: 14, display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(255,255,255,0.18)", borderRadius: 20, padding: "4px 14px" }}>
@@ -707,7 +826,7 @@ function ChildPage({ allWords, allTopics, onGoParent, dbSession, onUpdateWord, c
             </button>
 
             {/* Study card */}
-            <button onClick={() => setView("wordlist")}
+            <button onClick={() => { setPerfectScore(false); setView("wordlist"); saveViewState("wordlist", false); }}
               style={{ width: "100%", borderRadius: 24, border: "none", background: "linear-gradient(135deg,#2A2015,#4A3A25)", padding: "28px 24px", cursor: "pointer", textAlign: "left", boxShadow: "0 12px 36px rgba(42,32,21,0.35)", transition: "transform 0.18s, box-shadow 0.18s" }}
               onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 18px 42px rgba(42,32,21,0.45)"; }}
               onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 12px 36px rgba(42,32,21,0.35)"; }}
@@ -724,49 +843,74 @@ function ChildPage({ allWords, allTopics, onGoParent, dbSession, onUpdateWord, c
           </div>
         )}
 
-        {testOpen && <TestScreen testWords={testPool} allTopics={allTopics} onClose={() => setTestOpen(false)} onComplete={handleTestComplete} max_wrong={WORDS_PER_SESSION}/>}
+        {testOpen && <TestScreen
+          testWords={resumeChallenge ? resumeChallenge.testWords : testPool}
+          allTopics={allTopics}
+          onClose={() => setTestOpen(false)}
+          onComplete={handleTestComplete}
+          onSaveProgress={saveChallengeProgress}
+          initialState={resumeChallenge ? { idx: resumeChallenge.idx, submitted: resumeChallenge.submitted, results: resumeChallenge.results } : undefined}
+        />}
         {showDone && <DoneOverlay count={session.length} onNewList={getNewList} />}
       </div>
     );
   }
 
-  // ── view: "wordlist" ──────────────────────────────────────────────────────
+  // ── view: "wordlist" (practice page — no back button, same logical page) ───
   return (
     <div style={{ minHeight: "100vh", background: "#F5EFE0" }}>
-      <Header showBack onBack={() => setView("home")} />
+      <Header />
 
-      {/* Topic filter */}
-      <div style={{ padding: "16px 24px 0", display: "flex", gap: 8, overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
-        {sessionTopics.map(t => {
-          const c = t === "All" ? "#2A2015" : getTopicColor(t, allTopics);
-          const cnt = t === "All" ? session.length : session.filter(w => (w.topics||[]).includes(t)).length;
-          return (
-            <button key={t} onClick={() => setFilter(t)} style={{ flexShrink: 0, padding: "6px 16px", borderRadius: 20, border: "2px solid", borderColor: filter === t ? c : "#E0D8C8", background: filter === t ? c + "18" : "transparent", color: filter === t ? c : "#8A7A5A", fontFamily: "'Nunito',sans-serif", fontSize: 12, fontWeight: 700, cursor: "pointer", transition: "all 0.15s" }}>
-              {t === "All" ? `All (${session.length})` : `${t} (${cnt})`}
-            </button>
-          );
-        })}
-      </div>
+      {perfectScore ? (
+        /* ── Perfect score state ── */
+        <div style={{ padding: "48px 32px 40px", textAlign: "center", animation: "fadeSlideIn 0.4s ease" }}>
+          <div style={{ fontSize: 72, marginBottom: 16, animation: "popIn 0.5s ease both" }}>🏆</div>
+          <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 26, fontWeight: 900, color: "#2A2015", letterSpacing: -0.6, marginBottom: 8 }}>
+            Perfect score!
+          </div>
+          <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 14, color: "#8A7A5A", lineHeight: 1.6 }}>
+            You got every word right. Nothing to write today — great job! 🎉
+          </div>
+        </div>
+      ) : (
+        <>
+          {/* Topic filter */}
+          <div style={{ padding: "16px 24px 0", display: "flex", gap: 8, overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
+            {sessionTopics.map(t => {
+              const c = t === "All" ? "#2A2015" : getTopicColor(t, allTopics);
+              const cnt = t === "All" ? session.length : session.filter(w => (w.topics||[]).includes(t)).length;
+              return (
+                <button key={t} onClick={() => setFilter(t)} style={{ flexShrink: 0, padding: "6px 16px", borderRadius: 20, border: "2px solid", borderColor: filter === t ? c : "#E0D8C8", background: filter === t ? c + "18" : "transparent", color: filter === t ? c : "#8A7A5A", fontFamily: "'Nunito',sans-serif", fontSize: 12, fontWeight: 700, cursor: "pointer", transition: "all 0.15s" }}>
+                  {t === "All" ? `All (${session.length})` : `${t} (${cnt})`}
+                </button>
+              );
+            })}
+          </div>
 
-      <div style={{ padding: "16px 24px 140px", display: "flex", flexDirection: "column", gap: 10 }}>
-        {filteredWords.map((word, i) => (
-          <WordCard key={`${sessionCount}-${word.id}`} word={word} index={i} allTopics={allTopics}
-            onOpen={w => { setCurrentIndex(filteredWords.findIndex(x => x.id === w.id)); setFlashcardOpen(true); }} />
-        ))}
-      </div>
+          <div style={{ padding: "16px 24px 120px", display: "flex", flexDirection: "column", gap: 10 }}>
+            {filteredWords.map((word, i) => (
+              <WordCard key={`${sessionCount}-${word.id}`} word={word} index={i} allTopics={allTopics}
+                onOpen={w => { setCurrentIndex(filteredWords.findIndex(x => x.id === w.id)); setFlashcardOpen(true); }} />
+            ))}
+          </div>
+        </>
+      )}
 
-      {/* Bottom bar: Mark as Written + New Practice */}
+      {/* Bottom bar */}
       <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, padding: "12px 24px 28px", background: "linear-gradient(transparent,#F5EFE0 35%)" }}>
-        <div style={{ display: "flex", gap: 10 }}>
-          <button onClick={() => {setShowDone(true); setView("home")}} style={{ flex: 1, height: 54, background: "#FFFDF8", border: "2px solid #E8DFC8", borderRadius: 18, color: "#5A9E8A", fontFamily: "'Nunito',sans-serif", fontSize: 13, fontWeight: 800, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, boxShadow: "0 2px 12px rgba(0,0,0,0.06)", transition: "all 0.15s" }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = "#5A9E8A88"; e.currentTarget.style.background = "#F0FAF6"; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = "#E8DFC8"; e.currentTarget.style.background = "#FFFDF8"; }}
-          >✅ Mark as Written</button>
-          {/* <button onClick={() => setView("home")} style={{ flex: 1, height: 54, background: "#2A2015", border: "none", borderRadius: 18, color: "#fff", fontFamily: "'Nunito',sans-serif", fontSize: 13, fontWeight: 800, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, boxShadow: "0 8px 28px rgba(42,32,21,0.3)", transition: "transform 0.15s" }}
+        {perfectScore ? (
+          <button onClick={getNewList}
+            style={{ width: "100%", height: 54, background: "#2A2015", border: "none", borderRadius: 18, color: "#fff", fontFamily: "'Nunito',sans-serif", fontSize: 16, fontWeight: 800, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, boxShadow: "0 8px 28px rgba(42,32,21,0.35)", transition: "transform 0.15s" }}
             onMouseEnter={e => e.currentTarget.style.transform = "scale(1.02)"}
             onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
-          >🔀 New Practice</button> */}
-        </div>
+          >🔀 New Practice</button>
+        ) : (
+          <button onClick={() => setShowDone(true)}
+            style={{ width: "100%", height: 54, background: "#2A2015", border: "none", borderRadius: 18, color: "#fff", fontFamily: "'Nunito',sans-serif", fontSize: 16, fontWeight: 800, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, boxShadow: "0 8px 28px rgba(42,32,21,0.35)", transition: "transform 0.15s" }}
+            onMouseEnter={e => e.currentTarget.style.transform = "scale(1.02)"}
+            onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
+          >✅ Mark as Written</button>
+        )}
       </div>
 
       {flashcardOpen && <Flashcard onClose={() => setFlashcardOpen(false)} words={filteredWords} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} allTopics={allTopics} />}
@@ -801,6 +945,26 @@ function LearnedDateEditor({ word, onSave }) {
       {val && !dirty && (
         <button onClick={handleClear} title="Clear date" style={{ background: "none", border: "none", color: "#A0C0B0", cursor: "pointer", fontSize: 14, padding: "2px 4px" }}>×</button>
       )}
+    </div>
+  );
+}
+
+// ─── Score editor — parents adjust priority directly ─────────────────────────
+function ScoreEditor({ word, onSave }) {
+  const score  = word.score ?? 50;
+  const color  = score >= 70 ? "#D45A5A" : score >= 40 ? "#C4943A" : "#5A9E8A";
+  const bg     = score >= 70 ? "#D45A5A14" : score >= 40 ? "#C4943A14" : "#5A9E8A14";
+  const border = score >= 70 ? "#D45A5A44" : score >= 40 ? "#C4943A44" : "#5A9E8A44";
+
+  const step = (delta) => onSave(Math.max(0, Math.min(100, score + delta)));
+
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 0, background: bg, border: `1.5px solid ${border}`, borderRadius: 8, overflow: "hidden" }}>
+      <button onClick={() => step(-10)} disabled={score <= 0}
+        style={{ width: 24, height: 24, border: "none", background: "none", cursor: score <= 0 ? "default" : "pointer", fontSize: 13, fontWeight: 800, color: score <= 0 ? "#D8D0C0" : color, display: "flex", alignItems: "center", justifyContent: "center" }}>−</button>
+      <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 12, fontWeight: 800, color, minWidth: 28, textAlign: "center" }}>{score}</div>
+      <button onClick={() => step(10)} disabled={score >= 100}
+        style={{ width: 24, height: 24, border: "none", background: "none", cursor: score >= 100 ? "default" : "pointer", fontSize: 13, fontWeight: 800, color: score >= 100 ? "#D8D0C0" : color, display: "flex", alignItems: "center", justifyContent: "center" }}>+</button>
     </div>
   );
 }
@@ -1104,16 +1268,18 @@ function SettingsTab({ config, onSave }) {
   const N = { fontFamily: "'Nunito',sans-serif" };
   const [study,     setStudy]     = useState(config?.wordsPerSession ?? DEFAULT_WORDS_PER_SESSION);
   const [challenge, setChallenge] = useState(config?.testPoolSize    ?? DEFAULT_TEST_POOL_SIZE);
+  const [avoidDays, setAvoidDays] = useState(config?.avoidRepeatDays ?? DEFAULT_AVOID_REPEAT_DAYS);
   const [saved, setSaved] = useState(false);
 
   const handleSave = async () => {
-    await onSave({ wordsPerSession: study, testPoolSize: challenge });
+    await onSave({ wordsPerSession: study, testPoolSize: challenge, avoidRepeatDays: avoidDays });
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };
 
   const dirty = study !== (config?.wordsPerSession ?? DEFAULT_WORDS_PER_SESSION)
-             || challenge !== (config?.testPoolSize ?? DEFAULT_TEST_POOL_SIZE);
+             || challenge !== (config?.testPoolSize ?? DEFAULT_TEST_POOL_SIZE)
+             || avoidDays !== (config?.avoidRepeatDays ?? DEFAULT_AVOID_REPEAT_DAYS);
 
   const StepInput = ({ label, sub, value, onChange, min, max }) => (
     <div style={{ background: "#FFFDF8", border: "2px solid #EAE0CC", borderRadius: 16, padding: "16px 18px", marginBottom: 12 }}>
@@ -1159,6 +1325,14 @@ function SettingsTab({ config, onSave }) {
         onChange={setChallenge}
         min={5}
         max={30}
+      />
+      <StepInput
+        label="Avoid repeats for"
+        sub="Days before a word can be picked again (0 = no restriction)"
+        value={avoidDays}
+        onChange={setAvoidDays}
+        min={0}
+        max={14}
       />
 
       <div style={{ ...N, fontSize: 12, color: "#B0A080", marginBottom: 20, lineHeight: 1.6 }}>
@@ -1215,29 +1389,65 @@ function ImportExportTab({ allWords, testHistory, writtenHistory, onImportWords,
     setTimeout(() => setExportStatus(null), 2500);
   };
 
-  // ── Import state ──────────────────────────────────────────────────────────
-  const [importData, setImportData]   = useState(null);
-  const [importOpts, setImportOpts]   = useState({ words: true, learnedDates: true, scores: true, testHistory: true, writtenHistory: true });
-  const [importError, setImportError] = useState(null);
+  // ── Shared import parser ──────────────────────────────────────────────────
+  const [importData, setImportData]     = useState(null);
+  const [importOpts, setImportOpts]     = useState({ words: true, learnedDates: true, scores: true, testHistory: true, writtenHistory: true });
+  const [importError, setImportError]   = useState(null);
   const [importStatus, setImportStatus] = useState(null);
 
+  const parseAndLoad = (text, source) => {
+    try {
+      const parsed = JSON.parse(text);
+      if (!parsed.words || !Array.isArray(parsed.words)) throw new Error("bad format");
+      setImportData({ ...parsed, _source: source });
+      setImportError(null);
+    } catch {
+      setImportError(`Could not parse ${source} — make sure it's a valid Pick Word JSON export.`);
+    }
+  };
+
+  const resetImport = () => {
+    setImportData(null);
+    setImportError(null);
+    setImportStatus(null);
+    if (fileRef.current) fileRef.current.value = "";
+    setLinkUrl("");
+    setLinkLoading(false);
+  };
+
+  // ── File import ───────────────────────────────────────────────────────────
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    setImportError(null); setImportData(null); setImportStatus(null);
+    resetImport();
     const reader = new FileReader();
-    reader.onload = (ev) => {
-      try {
-        const parsed = JSON.parse(ev.target.result);
-        if (!parsed.words || !Array.isArray(parsed.words)) throw new Error("bad format");
-        setImportData(parsed);
-      } catch {
-        setImportError("Invalid file — please choose a Pick Word export JSON.");
-      }
-    };
+    reader.onload = (ev) => parseAndLoad(ev.target.result, `"${file.name}"`);
     reader.readAsText(file);
   };
 
+  // ── Link import ───────────────────────────────────────────────────────────
+  const [linkUrl, setLinkUrl]         = useState("");
+  const [linkLoading, setLinkLoading] = useState(false);
+
+  const handleLinkFetch = async () => {
+    const url = linkUrl.trim();
+    if (!url) return;
+    resetImport();
+    setLinkUrl(url); // restore after reset
+    setLinkLoading(true);
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      parseAndLoad(text, "link");
+    } catch (e) {
+      setImportError(`Could not fetch the URL: ${e.message}. Make sure it's publicly accessible and returns a JSON file.`);
+    } finally {
+      setLinkLoading(false);
+    }
+  };
+
+  // ── Execute import ────────────────────────────────────────────────────────
   const handleImport = async () => {
     if (!importData) return;
     const existingWords = new Set(allWords.map(w => w.word.toLowerCase()));
@@ -1253,7 +1463,6 @@ function ImportExportTab({ allWords, testHistory, writtenHistory, onImportWords,
         });
       onImportWords(toAdd);
 
-      // For existing words: optionally merge learnedAt / score
       if (importOpts.learnedDates || importOpts.scores) {
         importData.words
           .filter(w => existingWords.has(w.word.toLowerCase()))
@@ -1264,7 +1473,7 @@ function ImportExportTab({ allWords, testHistory, writtenHistory, onImportWords,
             if (importOpts.learnedDates && w.learnedAt && !existing.learnedAt) updated.learnedAt = w.learnedAt;
             if (importOpts.scores && w.score !== undefined) updated.score = w.score;
             if (updated.learnedAt !== existing.learnedAt || updated.score !== existing.score)
-              onImportWords([updated]); // triggers putWord via onAddWord — actually calls addWord which checks; fine for upsert
+              onImportWords([updated]);
           });
       }
     }
@@ -1277,6 +1486,7 @@ function ImportExportTab({ allWords, testHistory, writtenHistory, onImportWords,
     setImportStatus("done");
     setImportData(null);
     if (fileRef.current) fileRef.current.value = "";
+    setLinkUrl("");
     setTimeout(() => setImportStatus(null), 3000);
   };
 
@@ -1335,40 +1545,78 @@ function ImportExportTab({ allWords, testHistory, writtenHistory, onImportWords,
       </>)}
 
       {/* ── IMPORT ── */}
-      {sectionTitle("📥", "Import", "Merge data from a Pick Word backup file")}
+      {sectionTitle("📥", "Import", "Merge data from a Pick Word backup")}
       {card(<>
-        <input ref={fileRef} type="file" accept=".json,application/json" onChange={handleFileChange} style={{ display: "none" }} id="import-file-input" />
-        <label htmlFor="import-file-input" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, height: 46, borderRadius: 14, border: "2px dashed #C4943A88", background: "#FFF8EE", cursor: "pointer", ...N, fontSize: 14, fontWeight: 700, color: "#C4943A", marginBottom: 14 }}>
-          📂 Choose backup JSON file
-        </label>
+        {/* ── Source pickers ── */}
+        {!importData && (
+          <>
+            {/* File */}
+            <div style={{ ...N, fontSize: 12, fontWeight: 800, color: "#8A7A5A", letterSpacing: 0.6, textTransform: "uppercase", marginBottom: 8 }}>From file</div>
+            <input ref={fileRef} type="file" accept=".json,application/json" onChange={handleFileChange} style={{ display: "none" }} id="import-file-input" />
+            <label htmlFor="import-file-input" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, height: 46, borderRadius: 14, border: "2px dashed #C4943A88", background: "#FFF8EE", cursor: "pointer", ...N, fontSize: 14, fontWeight: 700, color: "#C4943A", marginBottom: 18 }}>
+              📂 Choose backup JSON file
+            </label>
 
+            {/* Link */}
+            <div style={{ ...N, fontSize: 12, fontWeight: 800, color: "#8A7A5A", letterSpacing: 0.6, textTransform: "uppercase", marginBottom: 8 }}>From link</div>
+            <div style={{ display: "flex", gap: 8 }}>
+              <input
+                value={linkUrl}
+                onChange={e => setLinkUrl(e.target.value)}
+                onKeyDown={e => { if (e.key === "Enter") handleLinkFetch(); }}
+                placeholder="https://… (URL to a JSON export)"
+                style={{ flex: 1, height: 46, borderRadius: 14, border: "2px solid #E8DFC8", background: "#FFFDF8", padding: "0 14px", ...N, fontSize: 13, color: "#1A1008", outline: "none" }}
+              />
+              <button
+                onClick={handleLinkFetch}
+                disabled={!linkUrl.trim() || linkLoading}
+                style={{ flexShrink: 0, height: 46, padding: "0 18px", borderRadius: 14, border: "none", background: !linkUrl.trim() || linkLoading ? "#D8D0C0" : "#C4943A", color: "#fff", ...N, fontSize: 14, fontWeight: 800, cursor: !linkUrl.trim() || linkLoading ? "default" : "pointer", display: "flex", alignItems: "center", gap: 6, transition: "background 0.2s" }}
+              >
+                {linkLoading
+                  ? <><div style={{ width: 16, height: 16, border: "2.5px solid rgba(255,255,255,0.35)", borderTop: "2.5px solid #fff", borderRadius: "50%", animation: "spin 0.7s linear infinite" }} /> Fetching</>
+                  : "Fetch →"}
+              </button>
+            </div>
+            <div style={{ ...N, fontSize: 11, color: "#B0A080", marginTop: 6 }}>
+              The URL must be publicly accessible and return a Pick Word JSON export.
+            </div>
+          </>
+        )}
+
+        {/* Status messages */}
         {importError && (
-          <div style={{ ...N, fontSize: 13, color: "#D45A5A", background: "#D45A5A12", border: "1px solid #D45A5A44", borderRadius: 10, padding: "8px 12px", marginBottom: 12 }}>{importError}</div>
+          <div style={{ ...N, fontSize: 13, color: "#D45A5A", background: "#D45A5A12", border: "1px solid #D45A5A44", borderRadius: 10, padding: "8px 12px", marginTop: 12 }}>{importError}</div>
         )}
         {importStatus === "done" && (
-          <div style={{ ...N, fontSize: 13, color: "#5A9E8A", background: "#5A9E8A12", border: "1px solid #5A9E8A44", borderRadius: 10, padding: "8px 12px", marginBottom: 12 }}>✓ Import complete!</div>
+          <div style={{ ...N, fontSize: 13, color: "#5A9E8A", background: "#5A9E8A12", border: "1px solid #5A9E8A44", borderRadius: 10, padding: "8px 12px", marginTop: 12 }}>✓ Import complete!</div>
         )}
 
+        {/* Preview + options (shared across all source types) */}
         {importData && (() => {
-          const newWords    = importData.words?.filter(w => !allWords.some(x => x.word.toLowerCase() === w.word.toLowerCase())) || [];
-          const existWords  = importData.words?.filter(w =>  allWords.some(x => x.word.toLowerCase() === w.word.toLowerCase())) || [];
+          const newWords   = importData.words?.filter(w => !allWords.some(x => x.word.toLowerCase() === w.word.toLowerCase())) || [];
+          const existWords = importData.words?.filter(w =>  allWords.some(x => x.word.toLowerCase() === w.word.toLowerCase())) || [];
           const th = importData.testHistory?.length    || 0;
           const wh = importData.writtenHistory?.length || 0;
           return (
             <>
-              {/* File summary */}
-              <div style={{ background: "#F5EFE0", borderRadius: 12, padding: "10px 14px", marginBottom: 14 }}>
-                <div style={{ ...N, fontSize: 12, fontWeight: 800, color: "#8A7A5A", marginBottom: 6 }}>FILE CONTENTS</div>
-                <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-                  {[
-                    [`${newWords.length} new words`, "#5A9E8A"],
-                    [`${existWords.length} already in library`, "#B0A080"],
-                    [`${th} test sessions`, "#6A8FD4"],
-                    [`${wh} written sessions`, "#C4943A"],
-                  ].map(([label, color]) => (
-                    <div key={label} style={{ ...N, fontSize: 12, fontWeight: 700, color }}>{label}</div>
-                  ))}
+              {/* Source badge */}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+                <div style={{ background: "#F5EFE0", borderRadius: 12, padding: "8px 14px", flex: 1 }}>
+                  <div style={{ ...N, fontSize: 12, fontWeight: 800, color: "#8A7A5A", marginBottom: 5 }}>
+                    {importData._source === "link" ? "🔗 FROM LINK" : `📂 ${importData._source?.toUpperCase() || "FILE"}`}
+                  </div>
+                  <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+                    {[
+                      [`${newWords.length} new words`, "#5A9E8A"],
+                      [`${existWords.length} already in library`, "#B0A080"],
+                      [`${th} test sessions`, "#6A8FD4"],
+                      [`${wh} written sessions`, "#C4943A"],
+                    ].map(([label, color]) => (
+                      <div key={label} style={{ ...N, fontSize: 12, fontWeight: 700, color }}>{label}</div>
+                    ))}
+                  </div>
                 </div>
+                <button onClick={resetImport} style={{ marginLeft: 10, background: "#F0E8D8", border: "none", borderRadius: 10, width: 32, height: 32, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 14, color: "#8A7A5A", flexShrink: 0 }}>✕</button>
               </div>
 
               <div style={{ ...N, fontSize: 13, fontWeight: 700, color: "#6A5A40", marginBottom: 10 }}>Choose what to import:</div>
@@ -1394,18 +1642,24 @@ function ImportExportTab({ allWords, testHistory, writtenHistory, onImportWords,
 // ─── Library tab with pagination ─────────────────────────────────────────────
 const PAGE_SIZE = 10;
 
-function LibraryTab({ allWords, allTopics, learnedCount, newCount, onEdit, onDelete, onUpdateLearnedAt, statusFilter, setStatusFilter, topicFilter, setTopicFilter, search, setSearch }) {
-  const [page, setPage] = useState(1);
+function LibraryTab({ allWords, allTopics, learnedCount, newCount, onEdit, onDelete, onUpdateLearnedAt, onUpdateScore, statusFilter, setStatusFilter, topicFilter, setTopicFilter, search, setSearch }) {
+  const [page, setPage]     = useState(1);
+  const [sortBy, setSortBy] = useState("default"); // "default" | "scoreDesc" | "scoreAsc"
 
   const filtered = allWords
     .filter(w => topicFilter === "All" || (w.topics||[]).includes(topicFilter))
     .filter(w => statusFilter === "All" || (statusFilter === "Learned" ? w.learnedAt !== null : w.learnedAt === null))
     .filter(w => !search || w.word.toLowerCase().includes(search.toLowerCase()) || (w.topics||[]).join(" ").toLowerCase().includes(search.toLowerCase()));
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  useEffect(() => { setPage(1); }, [search, statusFilter, topicFilter]);
+  const sorted = sortBy === "default" ? filtered : [...filtered].sort((a, b) => {
+    const sa = a.score ?? 50, sb = b.score ?? 50;
+    return sortBy === "scoreDesc" ? sb - sa : sa - sb;
+  });
+
+  const totalPages = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE));
+  useEffect(() => { setPage(1); }, [search, statusFilter, topicFilter, sortBy]);
   const safePage = Math.min(page, totalPages);
-  const pageWords = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+  const pageWords = sorted.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
   const N = { fontFamily: "'Nunito',sans-serif" };
 
   return (
@@ -1417,11 +1671,16 @@ function LibraryTab({ allWords, allTopics, learnedCount, newCount, onEdit, onDel
           style={{ width: "100%", height: 42, borderRadius: 14, border: "2px solid #E8DFC8", background: "#FFFDF8", paddingLeft: 40, paddingRight: 14, ...N, fontSize: 14, color: "#2A2015", outline: "none" }} />
       </div>
 
-      {/* Status filter */}
-      <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+      {/* Status filter + sort */}
+      <div style={{ display: "flex", gap: 8, marginBottom: 12, alignItems: "center", flexWrap: "wrap" }}>
         {[["All",`All (${allWords.length})`],["Learned",`Active (${learnedCount})`],["New",`Not learned yet (${newCount})`]].map(([key, label]) => (
           <button key={key} onClick={() => setStatusFilter(key)} style={{ padding: "5px 14px", borderRadius: 20, border: "2px solid", borderColor: statusFilter === key ? (key === "Learned" ? "#5A9E8A" : key === "New" ? "#C4943A" : "#2A2015") : "#E0D8C8", background: statusFilter === key ? (key === "Learned" ? "#5A9E8A18" : key === "New" ? "#C4943A18" : "#2A201518") : "transparent", color: statusFilter === key ? (key === "Learned" ? "#5A9E8A" : key === "New" ? "#C4943A" : "#2A2015") : "#8A7A5A", ...N, fontSize: 11, fontWeight: 700, cursor: "pointer", transition: "all 0.15s", flexShrink: 0 }}>{label}</button>
         ))}
+        <button onClick={() => setSortBy(s => s === "scoreDesc" ? "default" : "scoreDesc")}
+          title="Sort by priority score, highest first"
+          style={{ marginLeft: "auto", padding: "5px 12px", borderRadius: 20, border: "2px solid", borderColor: sortBy === "scoreDesc" ? "#D45A5A" : "#E0D8C8", background: sortBy === "scoreDesc" ? "#D45A5A18" : "transparent", color: sortBy === "scoreDesc" ? "#D45A5A" : "#8A7A5A", ...N, fontSize: 11, fontWeight: 700, cursor: "pointer", transition: "all 0.15s", flexShrink: 0, display: "flex", alignItems: "center", gap: 4 }}>
+          🔥 Priority {sortBy === "scoreDesc" ? "↓" : ""}
+        </button>
       </div>
 
       {/* Topic filter */}
@@ -1445,13 +1704,13 @@ function LibraryTab({ allWords, allTopics, learnedCount, newCount, onEdit, onDel
       })()}
 
       {/* Result summary */}
-      {filtered.length > 0 && (
+      {sorted.length > 0 && (
         <div style={{ ...N, fontSize: 12, color: "#B0A080", marginBottom: 12 }}>
-          {filtered.length} word{filtered.length !== 1 ? "s" : ""} · showing {(safePage - 1) * PAGE_SIZE + 1}–{Math.min(safePage * PAGE_SIZE, filtered.length)}
+          {sorted.length} word{sorted.length !== 1 ? "s" : ""} · showing {(safePage - 1) * PAGE_SIZE + 1}–{Math.min(safePage * PAGE_SIZE, sorted.length)}
         </div>
       )}
 
-      {filtered.length === 0 && (
+      {sorted.length === 0 && (
         <div style={{ textAlign: "center", color: "#B0A080", fontSize: 14, padding: "32px 0" }}>No words match the current filter.</div>
       )}
 
@@ -1489,9 +1748,15 @@ function LibraryTab({ allWords, allTopics, learnedCount, newCount, onEdit, onDel
                   </div>
                 </div>
               </div>
-              <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px solid #F0E8D8", display: "flex", alignItems: "center", gap: 8 }}>
-                <div style={{ ...N, fontSize: 11, fontWeight: 700, color: "#B0A080", letterSpacing: 0.5, textTransform: "uppercase", flexShrink: 0 }}>First learned</div>
-                <LearnedDateEditor word={w} onSave={val => onUpdateLearnedAt(w.id, val)} />
+              <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px solid #F0E8D8", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ ...N, fontSize: 11, fontWeight: 700, color: "#B0A080", letterSpacing: 0.5, textTransform: "uppercase", flexShrink: 0 }}>First learned</div>
+                  <LearnedDateEditor word={w} onSave={val => onUpdateLearnedAt(w.id, val)} />
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ ...N, fontSize: 11, fontWeight: 700, color: "#B0A080", letterSpacing: 0.5, textTransform: "uppercase", flexShrink: 0 }}>Priority</div>
+                  <ScoreEditor word={w} onSave={val => onUpdateScore(w.id, val)} />
+                </div>
               </div>
             </div>
           );
@@ -1544,6 +1809,11 @@ function ParentPage({ allWords, onAddWord, onUpdateWord, onRemoveWord, onBack, a
     if (word) onUpdateWord({ ...word, learnedAt: val });
   };
 
+  const updateScore = (id, val) => {
+    const word = allWords.find(w => w.id === id);
+    if (word) onUpdateWord({ ...word, score: val });
+  };
+
   const learnedCount = allWords.filter(w => w.learnedAt !== null).length;
   const newCount     = allWords.filter(w => w.learnedAt === null).length;
 
@@ -1582,6 +1852,7 @@ function ParentPage({ allWords, onAddWord, onUpdateWord, onRemoveWord, onBack, a
           onEdit={setEditWord}
           onDelete={setDeleteId}
           onUpdateLearnedAt={updateLearnedAt}
+          onUpdateScore={updateScore}
           statusFilter={statusFilter}
           setStatusFilter={setStatusFilter}
           topicFilter={topicFilter}
@@ -1655,6 +1926,10 @@ const STORE_WORDS           = "words";
 const STORE_SESSION         = "session";
 const STORE_TEST_HISTORY    = "testHistory";
 const STORE_WRITTEN_HISTORY = "writtenHistory";
+// session store keys
+const KEY_CHILD_SESSION     = "childSession";
+const KEY_CONFIG            = "config";
+const KEY_CHALLENGE         = "challengeSession"; // in-progress challenge state
 
 function openDB() {
   return new Promise((resolve, reject) => {
@@ -1735,6 +2010,7 @@ export default function App() {
   const [config, setConfig] = useState({
     wordsPerSession: DEFAULT_WORDS_PER_SESSION,
     testPoolSize:    DEFAULT_TEST_POOL_SIZE,
+    avoidRepeatDays: DEFAULT_AVOID_REPEAT_DAYS,
   });
 
   // ── Bootstrap: load from IndexedDB, seed if empty ──
@@ -1785,6 +2061,15 @@ export default function App() {
     setAllWordsState(ws => ws.filter(w => w.id !== id));
   }, []);
 
+  // Logs a written-practice session to IDB and appends it to local state.
+  // Returns the record so callers can use it immediately (state updates are async).
+  const logWrittenSession = useCallback(async (words) => {
+    const record = { id: Date.now(), date: new Date().toISOString().slice(0, 10), words };
+    await db.addWrittenSession(record);
+    setWrittenHistory(h => [...h, record]);
+    return record;
+  }, []);
+
   const allTopics = Array.from(new Set(allWords.flatMap(w => w.topics || [])));
 
   if (!ready) {
@@ -1821,6 +2106,8 @@ export default function App() {
             dbSession={db}
             onUpdateWord={updateWord}
             config={config}
+            writtenHistory={writtenHistory}
+            onLogWrittenSession={logWrittenSession}
           />
         : <ParentPage
             allWords={allWords}

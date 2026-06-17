@@ -11,7 +11,7 @@ export default defineConfig({
 
       // Files the SW pre-caches at install time (the "app shell")
       // vite-plugin-pwa auto-includes the built JS/CSS; list extra static assets here.
-      includeAssets: ['icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable.png'],
+      includeAssets: ['icons/icon-192.png', 'icons/icon-512.png'],
 
       manifest: {
         name: 'Pick Word',
@@ -35,7 +35,7 @@ export default defineConfig({
             type: 'image/png',
           },
           {
-            src: 'icons/icon-maskable.png',
+            src: 'icons/icon.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'maskable',       // Android adaptive icon safe zone

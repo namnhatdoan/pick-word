@@ -75,7 +75,6 @@ const makeSVG = (size, maskable = false) => {
 const files = [
   { name: 'icon-192.svg',      size: 192,  maskable: false },
   { name: 'icon-512.svg',      size: 512,  maskable: false },
-  { name: 'icon-maskable.svg', size: 512,  maskable: true  },
 ]
 
 files.forEach(({ name, size, maskable }) => {
@@ -90,4 +89,3 @@ console.log('  npx @squoosh/cli --oxipng {} public/icons/*.svg')
 console.log('or install sharp-cli:')
 console.log('  npx sharp-cli -i public/icons/icon-192.svg -o public/icons/icon-192.png')
 console.log('  npx sharp-cli -i public/icons/icon-512.svg -o public/icons/icon-512.png')
-console.log('  npx sharp-cli -i public/icons/icon-maskable.svg -o public/icons/icon-maskable.png')
