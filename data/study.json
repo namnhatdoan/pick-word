@@ -1,0 +1,214 @@
+{
+  "words": [
+    {
+      "word": "pencil",
+      "meaning": "A thin stick with grey or coloured material inside used for writing or drawing.",
+      "topics": ["Study Items"],
+      "color": "#FFD700",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Pencil_-_colored.jpg/640px-Pencil_-_colored.jpg"
+    },
+    {
+      "word": "pen",
+      "meaning": "A tool filled with ink used for writing.",
+      "topics": ["Study Items"],
+      "color": "#1E90FF",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Ballpoint-pen-parts.jpg/640px-Ballpoint-pen-parts.jpg"
+    },
+    {
+      "word": "eraser",
+      "meaning": "A small block of rubber used to remove pencil marks from paper.",
+      "topics": ["Study Items"],
+      "color": "#FFB6C1",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Eraser_on_table.jpg/640px-Eraser_on_table.jpg"
+    },
+    {
+      "word": "ruler",
+      "meaning": "A long flat tool with numbers used to measure length and draw straight lines.",
+      "topics": ["Study Items"],
+      "color": "#FFD700",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Ruler.jpg/640px-Ruler.jpg"
+    },
+    {
+      "word": "scissors",
+      "meaning": "A tool with two sharp blades joined together used to cut paper or fabric.",
+      "topics": ["Study Items"],
+      "color": "#C0C0C0",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Pair_of_scissors.jpg/640px-Pair_of_scissors.jpg"
+    },
+    {
+      "word": "glue",
+      "meaning": "A sticky substance used to join pieces of paper or objects together.",
+      "topics": ["Study Items"],
+      "color": "#FFFFFF",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Glue-stick.jpg/640px-Glue-stick.jpg"
+    },
+    {
+      "word": "sharpener",
+      "meaning": "A small tool used to make the tip of a pencil pointed again.",
+      "topics": ["Study Items"],
+      "color": "#FF6347",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Pencil_sharpener.jpg/640px-Pencil_sharpener.jpg"
+    },
+    {
+      "word": "notebook",
+      "meaning": "A book with blank or lined pages used for writing notes.",
+      "topics": ["Study Items"],
+      "color": "#90EE90",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Notebook.jpg/640px-Notebook.jpg"
+    },
+    {
+      "word": "textbook",
+      "meaning": "A book used in school that teaches you about a subject.",
+      "topics": ["Study Items"],
+      "color": "#4169E1",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Textbook.jpg/640px-Textbook.jpg"
+    },
+    {
+      "word": "dictionary",
+      "meaning": "A book that lists words in alphabetical order and explains what each word means.",
+      "topics": ["Study Items"],
+      "color": "#8B0000",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Dictionary_-_Merriam-Webster.jpg/640px-Dictionary_-_Merriam-Webster.jpg"
+    },
+    {
+      "word": "pencil case",
+      "meaning": "A small bag or box used to keep pencils, pens, and other stationery.",
+      "topics": ["Study Items"],
+      "color": "#FF69B4",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Pencil_case.jpg/640px-Pencil_case.jpg"
+    },
+    {
+      "word": "backpack",
+      "meaning": "A bag carried on your back used to bring books and supplies to school.",
+      "topics": ["Study Items"],
+      "color": "#4682B4",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Backpack.jpg/640px-Backpack.jpg"
+    },
+    {
+      "word": "calculator",
+      "meaning": "A small electronic device used to do maths calculations.",
+      "topics": ["Study Items"],
+      "color": "#808080",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Calculator.jpg/640px-Calculator.jpg"
+    },
+    {
+      "word": "highlighter",
+      "meaning": "A bright-coloured pen used to mark important words or sentences.",
+      "topics": ["Study Items"],
+      "color": "#FFFF00",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Highlighting.jpg/640px-Highlighting.jpg"
+    },
+    {
+      "word": "coloured pencils",
+      "meaning": "A set of pencils in many different colours used for drawing and colouring.",
+      "topics": ["Study Items"],
+      "color": "#FF4500",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Colored_pencils.jpg/640px-Colored_pencils.jpg"
+    },
+    {
+      "word": "stapler",
+      "meaning": "A device that pushes small metal staples through paper to hold sheets together.",
+      "topics": ["Study Items"],
+      "color": "#696969",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Stapler.jpg/640px-Stapler.jpg"
+    },
+    {
+      "word": "compass",
+      "meaning": "A tool with two arms used in maths to draw perfect circles.",
+      "topics": ["Study Items"],
+      "color": "#C0C0C0",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Compass_drawing.jpg/640px-Compass_drawing.jpg"
+    },
+    {
+      "word": "protractor",
+      "meaning": "A half-circle shaped tool used to measure and draw angles in maths.",
+      "topics": ["Study Items"],
+      "color": "#ADD8E6",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Protractor_Rapporteur_Dreieck.jpg/640px-Protractor_Rapporteur_Dreieck.jpg"
+    },
+    {
+      "word": "whiteboard",
+      "meaning": "A large smooth white board in the classroom that teachers write on with markers.",
+      "topics": ["Study Items"],
+      "color": "#FFFFFF",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Whiteboard_in_classroom.jpg/640px-Whiteboard_in_classroom.jpg"
+    },
+    {
+      "word": "desk",
+      "meaning": "A table used at school or home for writing and studying.",
+      "topics": ["Study Items"],
+      "color": "#DEB887",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/School_desk.jpg/640px-School_desk.jpg"
+    },
+    {
+      "word": "chair",
+      "meaning": "A seat with four legs and a back, used for sitting at a desk.",
+      "topics": ["Study Items"],
+      "color": "#8B4513",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Chair.jpg/640px-Chair.jpg"
+    },
+    {
+      "word": "bookshelf",
+      "meaning": "A piece of furniture with shelves used to store and organise books.",
+      "topics": ["Study Items"],
+      "color": "#8B4513",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Bookshelf.jpg/640px-Bookshelf.jpg"
+    },
+    {
+      "word": "paper",
+      "meaning": "Thin flat sheets used for writing, drawing, or printing.",
+      "topics": ["Study Items"],
+      "color": "#FFFFF0",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Stack_of_paper.jpg/640px-Stack_of_paper.jpg"
+    },
+    {
+      "word": "folder",
+      "meaning": "A flat container used to keep papers and documents organised.",
+      "topics": ["Study Items"],
+      "color": "#FFD700",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Manila_folder.jpg/640px-Manila_folder.jpg"
+    },
+    {
+      "word": "tape",
+      "meaning": "A thin clear sticky strip used to join pieces of paper together.",
+      "topics": ["Study Items"],
+      "color": "#ADD8E6",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Scotch_tape.jpg/640px-Scotch_tape.jpg"
+    },
+    {
+      "word": "clock",
+      "meaning": "A device on the wall that shows what time it is.",
+      "topics": ["Study Items"],
+      "color": "#FFFFFF",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Clock_face_for_lessons.svg/640px-Clock_face_for_lessons.svg.png"
+    },
+    {
+      "word": "globe",
+      "meaning": "A round model of the Earth on a stand used to learn about countries and oceans.",
+      "topics": ["Study Items"],
+      "color": "#1E90FF",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Globe_of_Earth.jpg/640px-Globe_of_Earth.jpg"
+    },
+    {
+      "word": "map",
+      "meaning": "A flat drawing that shows where countries, cities, rivers, and roads are.",
+      "topics": ["Study Items"],
+      "color": "#F4A460",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/World_map_blank.png/640px-World_map_blank.png"
+    },
+    {
+      "word": "rubber band",
+      "meaning": "A small stretchy ring used to hold papers or objects together.",
+      "topics": ["Study Items"],
+      "color": "#FF8C00",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Rubber_bands.jpg/640px-Rubber_bands.jpg"
+    },
+    {
+      "word": "paper clip",
+      "meaning": "A small metal clip used to hold sheets of paper together.",
+      "topics": ["Study Items"],
+      "color": "#C0C0C0",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Paperclips.jpg/640px-Paperclips.jpg"
+    }
+  ]
+}

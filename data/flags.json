@@ -1,0 +1,1768 @@
+{
+  "words": [
+    {
+      "word": "Vietnam",
+      "meaning": "A country in Southeast Asia. Its flag has a yellow star on a red background.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#DA251D",
+      "img": "https://flagcdn.com/w640/vn.png"
+    },
+    {
+      "word": "United States",
+      "meaning": "A country in North America. Its flag has red and white stripes and 50 stars on a blue corner.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#3C3B6E",
+      "img": "https://flagcdn.com/w640/us.png"
+    },
+    {
+      "word": "United Kingdom",
+      "meaning": "A country in Europe. Its flag is called the Union Jack and has red and white crosses on blue.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#012169",
+      "img": "https://flagcdn.com/w640/gb.png"
+    },
+    {
+      "word": "Australia",
+      "meaning": "A country and continent in the Southern Hemisphere. Its flag has the Union Jack and southern stars on blue.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#00008B",
+      "img": "https://flagcdn.com/w640/au.png"
+    },
+    {
+      "word": "France",
+      "meaning": "A country in Western Europe. Its flag has three vertical stripes: blue, white, and red.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#0055A4",
+      "img": "https://flagcdn.com/w640/fr.png"
+    },
+    {
+      "word": "Germany",
+      "meaning": "A country in Central Europe. Its flag has three horizontal stripes: black, red, and gold.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#FFCE00",
+      "img": "https://flagcdn.com/w640/de.png"
+    },
+    {
+      "word": "Japan",
+      "meaning": "A country in East Asia. Its flag is white with a red circle in the middle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#BC002D",
+      "img": "https://flagcdn.com/w640/jp.png"
+    },
+    {
+      "word": "China",
+      "meaning": "A large country in East Asia. Its flag is red with a large yellow star and four smaller stars.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#DE2910",
+      "img": "https://flagcdn.com/w640/cn.png"
+    },
+    {
+      "word": "South Korea",
+      "meaning": "A country in East Asia. Its flag has a red and blue circle on white with black symbols in the corners.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#003478",
+      "img": "https://flagcdn.com/w640/kr.png"
+    },
+    {
+      "word": "Brazil",
+      "meaning": "The largest country in South America. Its flag is green with a yellow diamond and a blue circle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#009C3B",
+      "img": "https://flagcdn.com/w640/br.png"
+    },
+    {
+      "word": "Canada",
+      "meaning": "A large country in North America. Its flag is red and white with a maple leaf in the middle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#FF0000",
+      "img": "https://flagcdn.com/w640/ca.png"
+    },
+    {
+      "word": "Italy",
+      "meaning": "A country in Southern Europe shaped like a boot. Its flag has three vertical stripes: green, white, and red.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#009246",
+      "img": "https://flagcdn.com/w640/it.png"
+    },
+    {
+      "word": "Spain",
+      "meaning": "A country in Southern Europe. Its flag has red stripes on top and bottom with a wide yellow stripe in the middle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#AA151B",
+      "img": "https://flagcdn.com/w640/es.png"
+    },
+    {
+      "word": "India",
+      "meaning": "A large country in South Asia. Its flag has orange, white, and green stripes with a blue wheel in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#FF9933",
+      "img": "https://flagcdn.com/w640/in.png"
+    },
+    {
+      "word": "Thailand",
+      "meaning": "A country in Southeast Asia. Its flag has red, white, and dark blue horizontal stripes.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#A51931",
+      "img": "https://flagcdn.com/w640/th.png"
+    },
+    {
+      "word": "Singapore",
+      "meaning": "A small island country in Southeast Asia. Its flag has red on top and white below with a crescent and five stars.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#EF3340",
+      "img": "https://flagcdn.com/w640/sg.png"
+    },
+    {
+      "word": "Indonesia",
+      "meaning": "A large island country in Southeast Asia. Its flag has two stripes: red on top and white below.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/id.png"
+    },
+    {
+      "word": "Malaysia",
+      "meaning": "A country in Southeast Asia. Its flag has red and white stripes with a yellow crescent and star on blue.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CC0001",
+      "img": "https://flagcdn.com/w640/my.png"
+    },
+    {
+      "word": "Philippines",
+      "meaning": "An island country in Southeast Asia. Its flag has blue and red stripes with a yellow sun and three stars.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#0038A8",
+      "img": "https://flagcdn.com/w640/ph.png"
+    },
+    {
+      "word": "Russia",
+      "meaning": "The largest country in the world. Its flag has three horizontal stripes: white, blue, and red.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#0039A6",
+      "img": "https://flagcdn.com/w640/ru.png"
+    },
+    {
+      "word": "Mexico",
+      "meaning": "A country in North America. Its flag has green, white, and red stripes with an eagle in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#006847",
+      "img": "https://flagcdn.com/w640/mx.png"
+    },
+    {
+      "word": "South Africa",
+      "meaning": "A country at the southern tip of Africa. Its flag has six colors with a green Y-shape in the middle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#007A4D",
+      "img": "https://flagcdn.com/w640/za.png"
+    },
+    {
+      "word": "Argentina",
+      "meaning": "A large country in South America. Its flag has light blue and white stripes with a yellow sun in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#74ACDF",
+      "img": "https://flagcdn.com/w640/ar.png"
+    },
+    {
+      "word": "Netherlands",
+      "meaning": "A country in Western Europe. Its flag has three horizontal stripes: red, white, and blue.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#AE1C28",
+      "img": "https://flagcdn.com/w640/nl.png"
+    },
+    {
+      "word": "Sweden",
+      "meaning": "A country in Northern Europe. Its flag is blue with a yellow cross.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#006AA7",
+      "img": "https://flagcdn.com/w640/se.png"
+    },
+    {
+      "word": "Norway",
+      "meaning": "A country in Northern Europe. Its flag is red with a blue and white cross.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#EF2B2D",
+      "img": "https://flagcdn.com/w640/no.png"
+    },
+    {
+      "word": "Denmark",
+      "meaning": "A country in Northern Europe. Its flag is red with a white cross.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#C60C30",
+      "img": "https://flagcdn.com/w640/dk.png"
+    },
+    {
+      "word": "Finland",
+      "meaning": "A country in Northern Europe. Its flag is white with a blue cross.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#003580",
+      "img": "https://flagcdn.com/w640/fi.png"
+    },
+    {
+      "word": "Portugal",
+      "meaning": "A country in Western Europe. Its flag has green on the left and red on the right with a coat of arms.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#006600",
+      "img": "https://flagcdn.com/w640/pt.png"
+    },
+    {
+      "word": "Greece",
+      "meaning": "A country in Southern Europe. Its flag has blue and white stripes with a white cross on a blue corner.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#0D5EAF",
+      "img": "https://flagcdn.com/w640/gr.png"
+    },
+    {
+      "word": "Turkey",
+      "meaning": "A country between Europe and Asia. Its flag is red with a white crescent moon and star.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#E30A17",
+      "img": "https://flagcdn.com/w640/tr.png"
+    },
+    {
+      "word": "Saudi Arabia",
+      "meaning": "A country in the Middle East. Its flag is green with a white sword and Arabic writing.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#006C35",
+      "img": "https://flagcdn.com/w640/sa.png"
+    },
+    {
+      "word": "United Arab Emirates",
+      "meaning": "A country in the Middle East. Its flag has green, white, and black stripes with a red vertical stripe on the left.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#00732F",
+      "img": "https://flagcdn.com/w640/ae.png"
+    },
+    {
+      "word": "Egypt",
+      "meaning": "A country in North Africa. Its flag has red, white, and black horizontal stripes with a golden eagle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/eg.png"
+    },
+    {
+      "word": "Nigeria",
+      "meaning": "The most populous country in Africa. Its flag has three vertical stripes: green, white, and green.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#008751",
+      "img": "https://flagcdn.com/w640/ng.png"
+    },
+    {
+      "word": "Kenya",
+      "meaning": "A country in East Africa. Its flag has black, red, and green stripes with a Maasai shield and spears.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#006600",
+      "img": "https://flagcdn.com/w640/ke.png"
+    },
+    {
+      "word": "Ghana",
+      "meaning": "A country in West Africa. Its flag has red, gold, and green stripes with a black star in the middle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#006B3F",
+      "img": "https://flagcdn.com/w640/gh.png"
+    },
+    {
+      "word": "Ethiopia",
+      "meaning": "A country in East Africa. Its flag has green, yellow, and red stripes with a blue circle and star.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#078930",
+      "img": "https://flagcdn.com/w640/et.png"
+    },
+    {
+      "word": "Morocco",
+      "meaning": "A country in North Africa. Its flag is red with a green five-pointed star in the middle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#C1272D",
+      "img": "https://flagcdn.com/w640/ma.png"
+    },
+    {
+      "word": "Pakistan",
+      "meaning": "A country in South Asia. Its flag is dark green with a white crescent and star, and a white stripe on the left.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#01411C",
+      "img": "https://flagcdn.com/w640/pk.png"
+    },
+    {
+      "word": "Bangladesh",
+      "meaning": "A country in South Asia. Its flag is green with a large red circle in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#006A4E",
+      "img": "https://flagcdn.com/w640/bd.png"
+    },
+    {
+      "word": "Sri Lanka",
+      "meaning": "An island country in South Asia. Its flag is maroon with a golden lion holding a sword.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#8D153A",
+      "img": "https://flagcdn.com/w640/lk.png"
+    },
+    {
+      "word": "Nepal",
+      "meaning": "A country in South Asia, home to the Himalayas. Its flag is the only non-rectangular national flag, shaped like two stacked triangles.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#003893",
+      "img": "https://flagcdn.com/w640/np.png"
+    },
+    {
+      "word": "Myanmar",
+      "meaning": "A country in Southeast Asia. Its flag has yellow, green, and red stripes with a large white star.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#FECB00",
+      "img": "https://flagcdn.com/w640/mm.png"
+    },
+    {
+      "word": "Cambodia",
+      "meaning": "A country in Southeast Asia. Its flag has red and blue stripes with a white temple in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#032EA1",
+      "img": "https://flagcdn.com/w640/kh.png"
+    },
+    {
+      "word": "Laos",
+      "meaning": "A country in Southeast Asia. Its flag has red and blue horizontal stripes with a white circle in the middle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/la.png"
+    },
+    {
+      "word": "New Zealand",
+      "meaning": "An island country in the Pacific. Its flag is dark blue with the Union Jack and four red stars.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#00247D",
+      "img": "https://flagcdn.com/w640/nz.png"
+    },
+    {
+      "word": "Poland",
+      "meaning": "A country in Central Europe. Its flag has two horizontal stripes: white on top and red below.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#DC143C",
+      "img": "https://flagcdn.com/w640/pl.png"
+    },
+    {
+      "word": "Czech Republic",
+      "meaning": "A country in Central Europe. Its flag has white and red stripes with a blue triangle on the left.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#D7141A",
+      "img": "https://flagcdn.com/w640/cz.png"
+    },
+    {
+      "word": "Hungary",
+      "meaning": "A country in Central Europe. Its flag has three horizontal stripes: red, white, and green.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE2939",
+      "img": "https://flagcdn.com/w640/hu.png"
+    },
+    {
+      "word": "Romania",
+      "meaning": "A country in Eastern Europe. Its flag has three vertical stripes: blue, yellow, and red.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#002B7F",
+      "img": "https://flagcdn.com/w640/ro.png"
+    },
+    {
+      "word": "Ukraine",
+      "meaning": "A country in Eastern Europe. Its flag has two horizontal stripes: blue on top and yellow below.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#005BBB",
+      "img": "https://flagcdn.com/w640/ua.png"
+    },
+    {
+      "word": "Switzerland",
+      "meaning": "A country in Central Europe. Its flag is red with a white cross in the middle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#FF0000",
+      "img": "https://flagcdn.com/w640/ch.png"
+    },
+    {
+      "word": "Austria",
+      "meaning": "A country in Central Europe. Its flag has three horizontal stripes: red, white, and red.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#ED2939",
+      "img": "https://flagcdn.com/w640/at.png"
+    },
+    {
+      "word": "Belgium",
+      "meaning": "A country in Western Europe. Its flag has three vertical stripes: black, yellow, and red.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#EF3340",
+      "img": "https://flagcdn.com/w640/be.png"
+    },
+    {
+      "word": "Ireland",
+      "meaning": "An island country in Western Europe. Its flag has three vertical stripes: green, white, and orange.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#169B62",
+      "img": "https://flagcdn.com/w640/ie.png"
+    },
+    {
+      "word": "Israel",
+      "meaning": "A country in the Middle East. Its flag is white with two blue stripes and a blue Star of David.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#0038B8",
+      "img": "https://flagcdn.com/w640/il.png"
+    },
+    {
+      "word": "Jordan",
+      "meaning": "A country in the Middle East. Its flag has black, white, and green stripes with a red triangle and white star.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#007A3D",
+      "img": "https://flagcdn.com/w640/jo.png"
+    },
+    {
+      "word": "Iraq",
+      "meaning": "A country in the Middle East. Its flag has red, white, and black stripes with green Arabic writing.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/iq.png"
+    },
+    {
+      "word": "Iran",
+      "meaning": "A country in the Middle East. Its flag has green, white, and red stripes with a red emblem in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#239F40",
+      "img": "https://flagcdn.com/w640/ir.png"
+    },
+    {
+      "word": "Kazakhstan",
+      "meaning": "A very large country in Central Asia. Its flag is light blue with a yellow sun and eagle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#00AFCA",
+      "img": "https://flagcdn.com/w640/kz.png"
+    },
+    {
+      "word": "Mongolia",
+      "meaning": "A country in Central Asia. Its flag has red and blue stripes with a golden symbol on the left.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#C4272F",
+      "img": "https://flagcdn.com/w640/mn.png"
+    },
+    {
+      "word": "Cuba",
+      "meaning": "An island country in the Caribbean. Its flag has blue and white stripes with a red triangle and white star.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#002A8F",
+      "img": "https://flagcdn.com/w640/cu.png"
+    },
+    {
+      "word": "Colombia",
+      "meaning": "A country in South America. Its flag has three horizontal stripes: yellow (wide), blue, and red.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#FCD116",
+      "img": "https://flagcdn.com/w640/co.png"
+    },
+    {
+      "word": "Venezuela",
+      "meaning": "A country in South America. Its flag has yellow, blue, and red stripes with white stars in the middle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CF142B",
+      "img": "https://flagcdn.com/w640/ve.png"
+    },
+    {
+      "word": "Peru",
+      "meaning": "A country in South America. Its flag has three vertical stripes: red, white, and red.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#D91023",
+      "img": "https://flagcdn.com/w640/pe.png"
+    },
+    {
+      "word": "Chile",
+      "meaning": "A long, narrow country in South America. Its flag has red and white stripes with a blue square and white star.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#D52B1E",
+      "img": "https://flagcdn.com/w640/cl.png"
+    },
+    {
+      "word": "Ecuador",
+      "meaning": "A country in South America on the equator. Its flag has yellow, blue, and red stripes with a coat of arms.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#FFD100",
+      "img": "https://flagcdn.com/w640/ec.png"
+    },
+    {
+      "word": "Bolivia",
+      "meaning": "A landlocked country in South America. Its flag has three horizontal stripes: red, yellow, and green.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#D52B1E",
+      "img": "https://flagcdn.com/w640/bo.png"
+    },
+    {
+      "word": "Paraguay",
+      "meaning": "A landlocked country in South America. Its flag has red, white, and blue horizontal stripes with emblems on both sides.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#D52B1E",
+      "img": "https://flagcdn.com/w640/py.png"
+    },
+    {
+      "word": "Uruguay",
+      "meaning": "A small country in South America. Its flag has white and blue stripes with a yellow sun on a white corner.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#5EB6E4",
+      "img": "https://flagcdn.com/w640/uy.png"
+    },
+    {
+      "word": "Panama",
+      "meaning": "A country in Central America. Its flag has four squares of white with blue and red stars, blue, red, and white.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#003580",
+      "img": "https://flagcdn.com/w640/pa.png"
+    },
+    {
+      "word": "Jamaica",
+      "meaning": "An island country in the Caribbean. Its flag has a gold diagonal cross on black and green triangles.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#000000",
+      "img": "https://flagcdn.com/w640/jm.png"
+    },
+    {
+      "word": "Haiti",
+      "meaning": "An island country in the Caribbean. Its flag has blue and red horizontal stripes with a coat of arms in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#00209F",
+      "img": "https://flagcdn.com/w640/ht.png"
+    },
+    {
+      "word": "Guatemala",
+      "meaning": "A country in Central America. Its flag has blue, white, and blue vertical stripes with a quetzal bird.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#4997D0",
+      "img": "https://flagcdn.com/w640/gt.png"
+    },
+    {
+      "word": "Qatar",
+      "meaning": "A small country in the Middle East. Its flag is maroon with a white serrated edge on the left side.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#8D1B3D",
+      "img": "https://flagcdn.com/w640/qa.png"
+    },
+    {
+      "word": "Kuwait",
+      "meaning": "A small country in the Middle East. Its flag has green, white, and red stripes with a black trapezoid on the left.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#007A3D",
+      "img": "https://flagcdn.com/w640/kw.png"
+    },
+    {
+      "word": "Bahrain",
+      "meaning": "A small island country in the Middle East. Its flag has red and white sections separated by a serrated edge.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/bh.png"
+    },
+    {
+      "word": "Oman",
+      "meaning": "A country in the Middle East. Its flag has red, white, and green stripes with a national emblem on the left.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#DB161B",
+      "img": "https://flagcdn.com/w640/om.png"
+    },
+    {
+      "word": "Lebanon",
+      "meaning": "A country in the Middle East. Its flag has red and white stripes with a green cedar tree in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#00A550",
+      "img": "https://flagcdn.com/w640/lb.png"
+    },
+    {
+      "word": "Syria",
+      "meaning": "A country in the Middle East. Its flag has red, white, and black horizontal stripes with two green stars.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/sy.png"
+    },
+    {
+      "word": "Yemen",
+      "meaning": "A country in the Middle East. Its flag has three horizontal stripes: red, white, and black.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/ye.png"
+    },
+    {
+      "word": "North Korea",
+      "meaning": "A country in East Asia. Its flag has blue and red stripes with a white circle and red star.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#024FA2",
+      "img": "https://flagcdn.com/w640/kp.png"
+    },
+    {
+      "word": "Taiwan",
+      "meaning": "An island in East Asia. Its flag is red with a blue corner containing a white sun with twelve rays.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#FE0000",
+      "img": "https://flagcdn.com/w640/tw.png"
+    },
+    {
+      "word": "Uzbekistan",
+      "meaning": "A country in Central Asia. Its flag has blue, white, and green stripes with a crescent and stars.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#1EB53A",
+      "img": "https://flagcdn.com/w640/uz.png"
+    },
+    {
+      "word": "Costa Rica",
+      "meaning": "A country in Central America. Its flag has blue, white, red, white, and blue horizontal stripes.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#002B7F",
+      "img": "https://flagcdn.com/w640/cr.png"
+    },
+    {
+      "word": "Honduras",
+      "meaning": "A country in Central America. Its flag has blue and white horizontal stripes with five blue stars in the middle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#0073CF",
+      "img": "https://flagcdn.com/w640/hn.png"
+    },
+    {
+      "word": "El Salvador",
+      "meaning": "A small country in Central America. Its flag has blue, white, and blue horizontal stripes with a coat of arms.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#0F47AF",
+      "img": "https://flagcdn.com/w640/sv.png"
+    },
+    {
+      "word": "Nicaragua",
+      "meaning": "A country in Central America. Its flag has blue, white, and blue horizontal stripes with a rainbow triangle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#3E6EB4",
+      "img": "https://flagcdn.com/w640/ni.png"
+    },
+    {
+      "word": "Dominican Republic",
+      "meaning": "An island country in the Caribbean. Its flag has blue and red squares with a white cross and coat of arms.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#002D62",
+      "img": "https://flagcdn.com/w640/do.png"
+    },
+    {
+      "word": "Papua New Guinea",
+      "meaning": "A country in the Pacific Ocean. Its flag has black and red triangles with a yellow bird of paradise and stars.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#000000",
+      "img": "https://flagcdn.com/w640/pg.png"
+    },
+    {
+      "word": "Fiji",
+      "meaning": "An island country in the Pacific Ocean. Its flag is light blue with the Union Jack and a shield.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#68BFE5",
+      "img": "https://flagcdn.com/w640/fj.png"
+    },
+    {
+      "word": "Malta",
+      "meaning": "A small island country in the Mediterranean Sea. Its flag has white and red vertical halves with a cross on the white side.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CF142B",
+      "img": "https://flagcdn.com/w640/mt.png"
+    },
+    {
+      "word": "Cyprus",
+      "meaning": "An island country in the Mediterranean Sea. Its flag is white with an orange map of the island and green olive branches.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#D57800",
+      "img": "https://flagcdn.com/w640/cy.png"
+    },
+    {
+      "word": "Croatia",
+      "meaning": "A country in Southern Europe. Its flag has red, white, and blue horizontal stripes with a checkered coat of arms.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#FF0000",
+      "img": "https://flagcdn.com/w640/hr.png"
+    },
+    {
+      "word": "Serbia",
+      "meaning": "A country in Southeast Europe. Its flag has red, blue, and white horizontal stripes with a royal coat of arms.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#C6363C",
+      "img": "https://flagcdn.com/w640/rs.png"
+    },
+    {
+      "word": "Bulgaria",
+      "meaning": "A country in Southeast Europe. Its flag has three horizontal stripes: white, green, and red.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#00966E",
+      "img": "https://flagcdn.com/w640/bg.png"
+    },
+    {
+      "word": "Slovakia",
+      "meaning": "A country in Central Europe. Its flag has white, blue, and red horizontal stripes with a shield on the left.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#EE1C25",
+      "img": "https://flagcdn.com/w640/sk.png"
+    },
+    {
+      "word": "Lithuania",
+      "meaning": "A country in Northern Europe. Its flag has three horizontal stripes: yellow, green, and red.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#006A44",
+      "img": "https://flagcdn.com/w640/lt.png"
+    },
+    {
+      "word": "Latvia",
+      "meaning": "A country in Northern Europe. Its flag has dark red on top, a thin white stripe in the middle, and dark red below.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#9E3039",
+      "img": "https://flagcdn.com/w640/lv.png"
+    },
+    {
+      "word": "Estonia",
+      "meaning": "A country in Northern Europe. Its flag has three horizontal stripes: blue, black, and white.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#0072CE",
+      "img": "https://flagcdn.com/w640/ee.png"
+    },
+    {
+      "word": "Iceland",
+      "meaning": "An island country in the North Atlantic. Its flag is blue with a red and white cross.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#003897",
+      "img": "https://flagcdn.com/w640/is.png"
+    },
+    {
+      "word": "Luxembourg",
+      "meaning": "A small country in Western Europe. Its flag has three horizontal stripes: red, white, and light blue.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#EF3340",
+      "img": "https://flagcdn.com/w640/lu.png"
+    },
+    {
+      "word": "Algeria",
+      "meaning": "The largest country in Africa. Its flag has green and white vertical halves with a red crescent and star.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#006233",
+      "img": "https://flagcdn.com/w640/dz.png"
+    },
+    {
+      "word": "Tunisia",
+      "meaning": "A country in North Africa. Its flag is red with a white circle containing a red crescent and star.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#E70013",
+      "img": "https://flagcdn.com/w640/tn.png"
+    },
+    {
+      "word": "Tanzania",
+      "meaning": "A country in East Africa. Its flag has green, black, and blue diagonal stripes with yellow borders.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#1EB53A",
+      "img": "https://flagcdn.com/w640/tz.png"
+    },
+    {
+      "word": "Uganda",
+      "meaning": "A country in East Africa. Its flag has black, yellow, and red horizontal stripes with a grey crowned crane bird.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#000000",
+      "img": "https://flagcdn.com/w640/ug.png"
+    },
+    {
+      "word": "Senegal",
+      "meaning": "A country in West Africa. Its flag has green, yellow, and red vertical stripes with a green star in the middle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#00853F",
+      "img": "https://flagcdn.com/w640/sn.png"
+    },
+    {
+      "word": "Cameroon",
+      "meaning": "A country in Central Africa. Its flag has green, red, and yellow vertical stripes with a yellow star in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#007A5E",
+      "img": "https://flagcdn.com/w640/cm.png"
+    },
+    {
+      "word": "Zimbabwe",
+      "meaning": "A country in Southern Africa. Its flag has seven horizontal stripes with a white triangle and a golden bird.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#006400",
+      "img": "https://flagcdn.com/w640/zw.png"
+    },
+    {
+      "word": "Albania",
+      "meaning": "A country in Southeast Europe. Its flag is red with a black two-headed eagle in the middle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#E41E20",
+      "img": "https://flagcdn.com/w640/al.png"
+    },
+    {
+      "word": "Andorra",
+      "meaning": "A tiny country in the mountains between France and Spain. Its flag has blue, yellow, and red vertical stripes with a coat of arms.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#003DA5",
+      "img": "https://flagcdn.com/w640/ad.png"
+    },
+    {
+      "word": "Armenia",
+      "meaning": "A country in Western Asia. Its flag has three horizontal stripes: red, blue, and orange.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#D90012",
+      "img": "https://flagcdn.com/w640/am.png"
+    },
+    {
+      "word": "Azerbaijan",
+      "meaning": "A country at the border of Europe and Asia. Its flag has blue, red, and green stripes with a white crescent and star.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#0092BC",
+      "img": "https://flagcdn.com/w640/az.png"
+    },
+    {
+      "word": "Belarus",
+      "meaning": "A country in Eastern Europe. Its flag has red and green horizontal stripes with a white and red decorative stripe on the left.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CF101A",
+      "img": "https://flagcdn.com/w640/by.png"
+    },
+    {
+      "word": "Bosnia and Herzegovina",
+      "meaning": "A country in Southeast Europe. Its flag is blue with a yellow triangle and white stars along the edge.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#002395",
+      "img": "https://flagcdn.com/w640/ba.png"
+    },
+    {
+      "word": "Georgia",
+      "meaning": "A country in Western Asia near Europe. Its flag is white with a large red cross and four smaller red crosses.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#FF0000",
+      "img": "https://flagcdn.com/w640/ge.png"
+    },
+    {
+      "word": "Kosovo",
+      "meaning": "A country in Southeast Europe. Its flag is blue with a golden map of the country and six white stars above it.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#244AA5",
+      "img": "https://flagcdn.com/w640/xk.png"
+    },
+    {
+      "word": "Liechtenstein",
+      "meaning": "A tiny country in Central Europe. Its flag has blue and red horizontal stripes with a golden crown.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#002B7F",
+      "img": "https://flagcdn.com/w640/li.png"
+    },
+    {
+      "word": "Moldova",
+      "meaning": "A country in Eastern Europe. Its flag has blue, yellow, and red vertical stripes with a coat of arms in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#003DA5",
+      "img": "https://flagcdn.com/w640/md.png"
+    },
+    {
+      "word": "Monaco",
+      "meaning": "A tiny country on the south coast of France. Its flag has two horizontal stripes: red on top and white below.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/mc.png"
+    },
+    {
+      "word": "Montenegro",
+      "meaning": "A small country in Southeast Europe. Its flag is golden-yellow with a red center and a golden eagle coat of arms.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#D4AF37",
+      "img": "https://flagcdn.com/w640/me.png"
+    },
+    {
+      "word": "North Macedonia",
+      "meaning": "A country in Southeast Europe. Its flag is red with a golden sun with eight rays bursting from the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE2028",
+      "img": "https://flagcdn.com/w640/mk.png"
+    },
+    {
+      "word": "San Marino",
+      "meaning": "A tiny country inside Italy. Its flag has two horizontal stripes: white on top and light blue below with a coat of arms.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#5EB6E4",
+      "img": "https://flagcdn.com/w640/sm.png"
+    },
+    {
+      "word": "Slovenia",
+      "meaning": "A country in Central Europe. Its flag has white, blue, and red horizontal stripes with a coat of arms on the left.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#003DA5",
+      "img": "https://flagcdn.com/w640/si.png"
+    },
+    {
+      "word": "Vatican City",
+      "meaning": "The smallest country in the world, located inside Rome, Italy. Its flag has yellow and white vertical stripes with the papal keys and crown.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#FFE000",
+      "img": "https://flagcdn.com/w640/va.png"
+    },
+    {
+      "word": "Angola",
+      "meaning": "A country in Southern Africa. Its flag has red and black horizontal stripes with a yellow gear, machete, and star.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CC0000",
+      "img": "https://flagcdn.com/w640/ao.png"
+    },
+    {
+      "word": "Benin",
+      "meaning": "A country in West Africa. Its flag has a green vertical stripe on the left with yellow and red horizontal stripes on the right.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#008751",
+      "img": "https://flagcdn.com/w640/bj.png"
+    },
+    {
+      "word": "Botswana",
+      "meaning": "A country in Southern Africa. Its flag has blue and white stripes with a black stripe in the middle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#75AADB",
+      "img": "https://flagcdn.com/w640/bw.png"
+    },
+    {
+      "word": "Burkina Faso",
+      "meaning": "A country in West Africa. Its flag has red and green horizontal stripes with a yellow star in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#EF2B2D",
+      "img": "https://flagcdn.com/w640/bf.png"
+    },
+    {
+      "word": "Burundi",
+      "meaning": "A country in East Africa. Its flag has red and green triangles with a white diagonal cross and three red stars.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/bi.png"
+    },
+    {
+      "word": "Cape Verde",
+      "meaning": "An island country off the coast of West Africa. Its flag has blue stripes with a circle of ten yellow stars.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#003893",
+      "img": "https://flagcdn.com/w640/cv.png"
+    },
+    {
+      "word": "Central African Republic",
+      "meaning": "A country in the middle of Africa. Its flag has blue, white, green, and yellow stripes with a red vertical stripe and yellow star.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#289728",
+      "img": "https://flagcdn.com/w640/cf.png"
+    },
+    {
+      "word": "Chad",
+      "meaning": "A country in Central Africa. Its flag has three vertical stripes: blue, yellow, and red.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#002664",
+      "img": "https://flagcdn.com/w640/td.png"
+    },
+    {
+      "word": "Comoros",
+      "meaning": "A small island country off the east coast of Africa. Its flag is green with a white crescent and four white stars.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#3A75C4",
+      "img": "https://flagcdn.com/w640/km.png"
+    },
+    {
+      "word": "Congo",
+      "meaning": "A country in Central Africa. Its flag has green, yellow, and red diagonal stripes.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#009A44",
+      "img": "https://flagcdn.com/w640/cg.png"
+    },
+    {
+      "word": "DR Congo",
+      "meaning": "The largest country in sub-Saharan Africa. Its flag is blue with a red diagonal stripe and a yellow star in the corner.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#007FFF",
+      "img": "https://flagcdn.com/w640/cd.png"
+    },
+    {
+      "word": "Djibouti",
+      "meaning": "A small country in East Africa. Its flag has blue and green triangles with a white triangle and red star on the left.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#6AB2E7",
+      "img": "https://flagcdn.com/w640/dj.png"
+    },
+    {
+      "word": "Equatorial Guinea",
+      "meaning": "A country in Central Africa. Its flag has green, white, and red horizontal stripes with a blue triangle and coat of arms.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#3E9A00",
+      "img": "https://flagcdn.com/w640/gq.png"
+    },
+    {
+      "word": "Eritrea",
+      "meaning": "A country in East Africa. Its flag has green, red, and blue triangles with a yellow wreath and olive branch.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#4189DD",
+      "img": "https://flagcdn.com/w640/er.png"
+    },
+    {
+      "word": "Eswatini",
+      "meaning": "A small country in Southern Africa. Its flag has blue, yellow, and red stripes with a black and white Swazi shield and spears.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#3E5EB9",
+      "img": "https://flagcdn.com/w640/sz.png"
+    },
+    {
+      "word": "Gabon",
+      "meaning": "A country in Central Africa. Its flag has three horizontal stripes: green, yellow, and blue.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#009E60",
+      "img": "https://flagcdn.com/w640/ga.png"
+    },
+    {
+      "word": "Gambia",
+      "meaning": "A small country in West Africa. Its flag has red, blue, and green horizontal stripes with white borders around the blue stripe.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#3A7728",
+      "img": "https://flagcdn.com/w640/gm.png"
+    },
+    {
+      "word": "Guinea",
+      "meaning": "A country in West Africa. Its flag has three vertical stripes: red, yellow, and green.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/gn.png"
+    },
+    {
+      "word": "Guinea-Bissau",
+      "meaning": "A country in West Africa. Its flag has red, yellow, and green stripes with a black star on the left.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/gw.png"
+    },
+    {
+      "word": "Ivory Coast",
+      "meaning": "A country in West Africa. Its flag has three vertical stripes: orange, white, and green.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#F77F00",
+      "img": "https://flagcdn.com/w640/ci.png"
+    },
+    {
+      "word": "Lesotho",
+      "meaning": "A small country surrounded by South Africa. Its flag has blue, white, and green stripes with a black Basotho hat in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#009543",
+      "img": "https://flagcdn.com/w640/ls.png"
+    },
+    {
+      "word": "Liberia",
+      "meaning": "A country in West Africa. Its flag has red and white stripes with a blue square and white star, similar to the US flag.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#BF0A30",
+      "img": "https://flagcdn.com/w640/lr.png"
+    },
+    {
+      "word": "Libya",
+      "meaning": "A country in North Africa. Its flag has three horizontal stripes: red, black, and green with a white crescent and star.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#000000",
+      "img": "https://flagcdn.com/w640/ly.png"
+    },
+    {
+      "word": "Madagascar",
+      "meaning": "A large island country off the east coast of Africa. Its flag has a white vertical stripe on the left with red and green horizontal stripes.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#FC3D32",
+      "img": "https://flagcdn.com/w640/mg.png"
+    },
+    {
+      "word": "Malawi",
+      "meaning": "A country in Southern Africa. Its flag has black, red, and green horizontal stripes with a red rising sun at the top.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#000000",
+      "img": "https://flagcdn.com/w640/mw.png"
+    },
+    {
+      "word": "Mali",
+      "meaning": "A country in West Africa. Its flag has three vertical stripes: green, yellow, and red.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#009A00",
+      "img": "https://flagcdn.com/w640/ml.png"
+    },
+    {
+      "word": "Mauritania",
+      "meaning": "A country in West Africa. Its flag is green with a yellow crescent, star, and two red stripes at the top and bottom.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#006233",
+      "img": "https://flagcdn.com/w640/mr.png"
+    },
+    {
+      "word": "Mauritius",
+      "meaning": "A small island country in the Indian Ocean. Its flag has four horizontal stripes: red, blue, yellow, and green.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#EA2839",
+      "img": "https://flagcdn.com/w640/mu.png"
+    },
+    {
+      "word": "Mozambique",
+      "meaning": "A country in Southern Africa. Its flag has green, white, black, and yellow stripes with a red triangle and a yellow star, book, and hoe.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#009A44",
+      "img": "https://flagcdn.com/w640/mz.png"
+    },
+    {
+      "word": "Namibia",
+      "meaning": "A country in Southern Africa. Its flag has red, white, and green diagonal stripes with a golden sun in the blue corner.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#009543",
+      "img": "https://flagcdn.com/w640/na.png"
+    },
+    {
+      "word": "Niger",
+      "meaning": "A country in West Africa. Its flag has orange, white, and green horizontal stripes with an orange circle in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#E05206",
+      "img": "https://flagcdn.com/w640/ne.png"
+    },
+    {
+      "word": "Rwanda",
+      "meaning": "A country in East Africa. Its flag has blue, yellow, and green horizontal stripes with a golden sun in the blue stripe.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#20603D",
+      "img": "https://flagcdn.com/w640/rw.png"
+    },
+    {
+      "word": "Sao Tome and Principe",
+      "meaning": "A small island country in the Gulf of Guinea. Its flag has green, yellow, and green stripes with a red triangle and two black stars.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#12AD2B",
+      "img": "https://flagcdn.com/w640/st.png"
+    },
+    {
+      "word": "Seychelles",
+      "meaning": "A small island country in the Indian Ocean. Its flag has five colorful rays of blue, yellow, red, white, and green spreading from the bottom left corner.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#003F87",
+      "img": "https://flagcdn.com/w640/sc.png"
+    },
+    {
+      "word": "Sierra Leone",
+      "meaning": "A country in West Africa. Its flag has three horizontal stripes: green, white, and blue.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#1EB53A",
+      "img": "https://flagcdn.com/w640/sl.png"
+    },
+    {
+      "word": "Somalia",
+      "meaning": "A country in East Africa. Its flag is light blue with a white five-pointed star in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#4189DD",
+      "img": "https://flagcdn.com/w640/so.png"
+    },
+    {
+      "word": "South Sudan",
+      "meaning": "A young country in East Africa. Its flag has black, red, and green stripes with a blue triangle and yellow star.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#078930",
+      "img": "https://flagcdn.com/w640/ss.png"
+    },
+    {
+      "word": "Sudan",
+      "meaning": "A country in Northeast Africa. Its flag has red, white, and black horizontal stripes with a green triangle on the left.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#D21034",
+      "img": "https://flagcdn.com/w640/sd.png"
+    },
+    {
+      "word": "Togo",
+      "meaning": "A country in West Africa. Its flag has green and yellow horizontal stripes with a red square and white star in the corner.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#006A4E",
+      "img": "https://flagcdn.com/w640/tg.png"
+    },
+    {
+      "word": "Zambia",
+      "meaning": "A country in Southern Africa. Its flag is green with an orange eagle and red, black, and orange vertical stripes on the right.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#198A00",
+      "img": "https://flagcdn.com/w640/zm.png"
+    },
+    {
+      "word": "Antigua and Barbuda",
+      "meaning": "A twin-island country in the Caribbean. Its flag has a black triangle with a golden sun rising over red and white stripes.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/ag.png"
+    },
+    {
+      "word": "Bahamas",
+      "meaning": "An island country in the Caribbean. Its flag has blue and yellow horizontal stripes with a black triangle on the left.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#00778B",
+      "img": "https://flagcdn.com/w640/bs.png"
+    },
+    {
+      "word": "Barbados",
+      "meaning": "An island country in the Caribbean. Its flag has blue and yellow vertical stripes with a black trident in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#00267F",
+      "img": "https://flagcdn.com/w640/bb.png"
+    },
+    {
+      "word": "Belize",
+      "meaning": "A country in Central America. Its flag is blue with red stripes and a white circle containing the national coat of arms.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#003F87",
+      "img": "https://flagcdn.com/w640/bz.png"
+    },
+    {
+      "word": "Dominica",
+      "meaning": "An island country in the Caribbean. Its flag is green with a cross of yellow, black, and white stripes and a purple parrot in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#006B3F",
+      "img": "https://flagcdn.com/w640/dm.png"
+    },
+    {
+      "word": "Grenada",
+      "meaning": "A small island country in the Caribbean. Its flag has red borders with yellow stars, green and yellow triangles, and a nutmeg in a red circle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/gd.png"
+    },
+    {
+      "word": "Guyana",
+      "meaning": "A country in South America. Its flag is green with a white-bordered yellow triangle and a black-bordered red triangle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#009E60",
+      "img": "https://flagcdn.com/w640/gy.png"
+    },
+    {
+      "word": "Saint Kitts and Nevis",
+      "meaning": "A twin-island country in the Caribbean. Its flag has green, yellow, black, and red diagonal stripes with two white stars.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#009E60",
+      "img": "https://flagcdn.com/w640/kn.png"
+    },
+    {
+      "word": "Saint Lucia",
+      "meaning": "An island country in the Caribbean. Its flag is blue with a white, black, and gold triangle in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#65CFFF",
+      "img": "https://flagcdn.com/w640/lc.png"
+    },
+    {
+      "word": "Saint Vincent and the Grenadines",
+      "meaning": "An island country in the Caribbean. Its flag has blue, yellow, and green stripes with three green diamonds in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#009E60",
+      "img": "https://flagcdn.com/w640/vc.png"
+    },
+    {
+      "word": "Suriname",
+      "meaning": "A country in South America. Its flag has green, white, and red horizontal stripes with a large yellow star in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#377E3F",
+      "img": "https://flagcdn.com/w640/sr.png"
+    },
+    {
+      "word": "Trinidad and Tobago",
+      "meaning": "A twin-island country in the Caribbean. Its flag is red with a white-bordered black diagonal stripe from upper left to lower right.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/tt.png"
+    },
+    {
+      "word": "Afghanistan",
+      "meaning": "A country in Central Asia. Its flag has black, red, and green vertical stripes with a white emblem in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#000000",
+      "img": "https://flagcdn.com/w640/af.png"
+    },
+    {
+      "word": "Bhutan",
+      "meaning": "A country in South Asia in the Himalayas. Its flag has orange and red triangles with a white dragon in the middle.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#FF8000",
+      "img": "https://flagcdn.com/w640/bt.png"
+    },
+    {
+      "word": "Brunei",
+      "meaning": "A small country in Southeast Asia. Its flag is yellow with diagonal white and black stripes and a red coat of arms.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#F7E017",
+      "img": "https://flagcdn.com/w640/bn.png"
+    },
+    {
+      "word": "Kyrgyzstan",
+      "meaning": "A country in Central Asia. Its flag is red with a yellow circular sun containing a stylized pattern.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#E8112D",
+      "img": "https://flagcdn.com/w640/kg.png"
+    },
+    {
+      "word": "Maldives",
+      "meaning": "A small island country in the Indian Ocean. Its flag is red with a green rectangle and a white crescent moon.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#D21034",
+      "img": "https://flagcdn.com/w640/mv.png"
+    },
+    {
+      "word": "Tajikistan",
+      "meaning": "A country in Central Asia. Its flag has red, white, and green horizontal stripes with a golden crown and seven stars.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CC0000",
+      "img": "https://flagcdn.com/w640/tj.png"
+    },
+    {
+      "word": "Timor-Leste",
+      "meaning": "A young country in Southeast Asia. Its flag is red with a black triangle and a white star inside it.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#DC241F",
+      "img": "https://flagcdn.com/w640/tl.png"
+    },
+    {
+      "word": "Turkmenistan",
+      "meaning": "A country in Central Asia. Its flag is green with a red stripe containing carpet patterns and a white crescent and stars.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#1F9E3E",
+      "img": "https://flagcdn.com/w640/tm.png"
+    },
+    {
+      "word": "Kiribati",
+      "meaning": "A Pacific island country. Its flag has red on top with a yellow sun and frigate bird, and blue and white wavy stripes below.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/ki.png"
+    },
+    {
+      "word": "Marshall Islands",
+      "meaning": "A Pacific island country. Its flag is dark blue with diagonal orange and white stripes and a white star in the corner.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#003087",
+      "img": "https://flagcdn.com/w640/mh.png"
+    },
+    {
+      "word": "Micronesia",
+      "meaning": "A Pacific island country. Its flag is light blue with four white stars in the center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#75B2DD",
+      "img": "https://flagcdn.com/w640/fm.png"
+    },
+    {
+      "word": "Nauru",
+      "meaning": "A tiny island country in the Pacific Ocean. Its flag is blue with a yellow stripe and a white star below it.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#002B7F",
+      "img": "https://flagcdn.com/w640/nr.png"
+    },
+    {
+      "word": "Palau",
+      "meaning": "A Pacific island country. Its flag is light blue with a large yellow circle slightly to the left of center.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#4AADD6",
+      "img": "https://flagcdn.com/w640/pw.png"
+    },
+    {
+      "word": "Samoa",
+      "meaning": "A Pacific island country. Its flag is red with a blue rectangle in the corner containing a white Southern Cross constellation.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#CE1126",
+      "img": "https://flagcdn.com/w640/ws.png"
+    },
+    {
+      "word": "Solomon Islands",
+      "meaning": "A Pacific island country. Its flag has blue and green triangles separated by a yellow diagonal stripe with five white stars.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#0120B0",
+      "img": "https://flagcdn.com/w640/sb.png"
+    },
+    {
+      "word": "Tonga",
+      "meaning": "A Pacific island kingdom. Its flag is red with a white rectangle in the corner containing a red cross.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#C10000",
+      "img": "https://flagcdn.com/w640/to.png"
+    },
+    {
+      "word": "Tuvalu",
+      "meaning": "A tiny Pacific island country. Its flag is light blue with the Union Jack and nine yellow stars representing its nine islands.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#009FCA",
+      "img": "https://flagcdn.com/w640/tv.png"
+    },
+    {
+      "word": "Vanuatu",
+      "meaning": "A Pacific island country. Its flag has black, red, and green sections with a yellow Y-shape and a boar's tusk.",
+      "topics": [
+        "Flags"
+      ],
+      "color": "#009543",
+      "img": "https://flagcdn.com/w640/vu.png"
+    }
+  ]
+}

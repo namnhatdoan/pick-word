@@ -1,0 +1,284 @@
+{
+  "words": [
+    {
+      "word": "knife",
+      "meaning": "A sharp tool used to cut food.",
+      "topics": ["Cooking"],
+      "color": "#A0A0A0",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Kitchen_knife.jpg/640px-Kitchen_knife.jpg"
+    },
+    {
+      "word": "fork",
+      "meaning": "A tool with pointed tips used to pick up food and eat.",
+      "topics": ["Cooking"],
+      "color": "#C0C0C0",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Table_setting_with_forks.jpg/640px-Table_setting_with_forks.jpg"
+    },
+    {
+      "word": "spoon",
+      "meaning": "A tool with a round bowl at the end used to eat soup or stir food.",
+      "topics": ["Cooking"],
+      "color": "#C0C0C0",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Spoons_-_stainless_steel.jpg/640px-Spoons_-_stainless_steel.jpg"
+    },
+    {
+      "word": "chopsticks",
+      "meaning": "Two thin sticks used together to pick up and eat food, common in Asian countries.",
+      "topics": ["Cooking"],
+      "color": "#8B4513",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Chopsticks_and_rice.jpg/640px-Chopsticks_and_rice.jpg"
+    },
+    {
+      "word": "plate",
+      "meaning": "A flat round dish used to serve and eat food.",
+      "topics": ["Cooking"],
+      "color": "#F5F5F5",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Ceramic_plate.jpg/640px-Ceramic_plate.jpg"
+    },
+    {
+      "word": "bowl",
+      "meaning": "A round, deep dish used to hold soup, rice, or cereal.",
+      "topics": ["Cooking"],
+      "color": "#F5DEB3",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Soup_bowl.jpg/640px-Soup_bowl.jpg"
+    },
+    {
+      "word": "cup",
+      "meaning": "A small container used to drink water, juice, or tea.",
+      "topics": ["Cooking"],
+      "color": "#87CEEB",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/640px-A_small_cup_of_coffee.JPG"
+    },
+    {
+      "word": "pot",
+      "meaning": "A deep round container used to cook food like soup or rice on the stove.",
+      "topics": ["Cooking"],
+      "color": "#696969",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Cooking_pot.jpg/640px-Cooking_pot.jpg"
+    },
+    {
+      "word": "pan",
+      "meaning": "A flat cooking container used to fry or cook food on the stove.",
+      "topics": ["Cooking"],
+      "color": "#2F2F2F",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Frying_pan.jpg/640px-Frying_pan.jpg"
+    },
+    {
+      "word": "spatula",
+      "meaning": "A flat tool used to flip or lift food while cooking.",
+      "topics": ["Cooking"],
+      "color": "#FF6347",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Spatula.jpg/640px-Spatula.jpg"
+    },
+    {
+      "word": "ladle",
+      "meaning": "A large deep spoon with a long handle used to serve soup or stew.",
+      "topics": ["Cooking"],
+      "color": "#C0C0C0",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Ladle_%28kitchen_tool%29.jpg/640px-Ladle_%28kitchen_tool%29.jpg"
+    },
+    {
+      "word": "whisk",
+      "meaning": "A tool with loops of wire used to mix or beat eggs, cream, or batter quickly.",
+      "topics": ["Cooking"],
+      "color": "#C0C0C0",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Balloon_whisk.jpg/640px-Balloon_whisk.jpg"
+    },
+    {
+      "word": "cutting board",
+      "meaning": "A flat board used to safely cut and chop food on.",
+      "topics": ["Cooking"],
+      "color": "#DEB887",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Cutting_board.jpg/640px-Cutting_board.jpg"
+    },
+    {
+      "word": "colander",
+      "meaning": "A bowl with small holes used to drain water from pasta or vegetables.",
+      "topics": ["Cooking"],
+      "color": "#C0C0C0",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Colander.jpg/640px-Colander.jpg"
+    },
+    {
+      "word": "grater",
+      "meaning": "A tool with rough surfaces used to shred cheese or vegetables into small pieces.",
+      "topics": ["Cooking"],
+      "color": "#C0C0C0",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Grater.jpg/640px-Grater.jpg"
+    },
+    {
+      "word": "peeler",
+      "meaning": "A small tool used to remove the skin from vegetables and fruit.",
+      "topics": ["Cooking"],
+      "color": "#FF8C00",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Potato_peeler.jpg/640px-Potato_peeler.jpg"
+    },
+    {
+      "word": "measuring cup",
+      "meaning": "A cup with markings used to measure the right amount of liquid or dry ingredients.",
+      "topics": ["Cooking"],
+      "color": "#ADD8E6",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Measuring_cups.jpg/640px-Measuring_cups.jpg"
+    },
+    {
+      "word": "oven",
+      "meaning": "A large appliance that uses heat to bake or roast food inside.",
+      "topics": ["Cooking"],
+      "color": "#808080",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Gas_oven.jpg/640px-Gas_oven.jpg"
+    },
+    {
+      "word": "stove",
+      "meaning": "A kitchen appliance with burners on top used to heat and cook food.",
+      "topics": ["Cooking"],
+      "color": "#696969",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Gas_stove_burner.jpg/640px-Gas_stove_burner.jpg"
+    },
+    {
+      "word": "refrigerator",
+      "meaning": "A large appliance that keeps food cold and fresh.",
+      "topics": ["Cooking"],
+      "color": "#E0E0E0",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Refrigerator.jpg/640px-Refrigerator.jpg"
+    },
+    {
+      "word": "microwave",
+      "meaning": "A small appliance that heats or cooks food very quickly using waves of energy.",
+      "topics": ["Cooking"],
+      "color": "#808080",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Microwave_oven.jpg/640px-Microwave_oven.jpg"
+    },
+    {
+      "word": "apron",
+      "meaning": "A piece of clothing worn over your clothes to keep them clean while cooking.",
+      "topics": ["Cooking"],
+      "color": "#4169E1",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Chef_with_apron.jpg/640px-Chef_with_apron.jpg"
+    },
+    {
+      "word": "recipe",
+      "meaning": "A set of instructions that tells you how to make a dish, including what ingredients to use.",
+      "topics": ["Cooking"],
+      "color": "#F4A460",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Cookbook.jpg/640px-Cookbook.jpg"
+    },
+    {
+      "word": "ingredient",
+      "meaning": "One of the foods or items you need to make a recipe.",
+      "topics": ["Cooking"],
+      "color": "#32CD32",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Cooking_ingredients.jpg/640px-Cooking_ingredients.jpg"
+    },
+    {
+      "word": "boil",
+      "meaning": "To heat water or liquid until it bubbles strongly.",
+      "topics": ["Cooking"],
+      "color": "#87CEEB",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Boiling_water.jpg/640px-Boiling_water.jpg"
+    },
+    {
+      "word": "fry",
+      "meaning": "To cook food in hot oil in a pan.",
+      "topics": ["Cooking"],
+      "color": "#FFD700",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Frying_egg.jpg/640px-Frying_egg.jpg"
+    },
+    {
+      "word": "bake",
+      "meaning": "To cook food in an oven using dry heat, like bread or cake.",
+      "topics": ["Cooking"],
+      "color": "#D2691E",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Baking_bread.jpg/640px-Baking_bread.jpg"
+    },
+    {
+      "word": "steam",
+      "meaning": "To cook food over boiling water using the hot steam rising from it.",
+      "topics": ["Cooking"],
+      "color": "#B0E0E6",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Steaming_vegetables.jpg/640px-Steaming_vegetables.jpg"
+    },
+    {
+      "word": "chop",
+      "meaning": "To cut food into pieces using a knife.",
+      "topics": ["Cooking"],
+      "color": "#228B22",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Chopping_vegetables.jpg/640px-Chopping_vegetables.jpg"
+    },
+    {
+      "word": "slice",
+      "meaning": "To cut food into thin, flat pieces.",
+      "topics": ["Cooking"],
+      "color": "#FF6347",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Sliced_bread.jpg/640px-Sliced_bread.jpg"
+    },
+    {
+      "word": "peel",
+      "meaning": "To remove the outer skin of a fruit or vegetable.",
+      "topics": ["Cooking"],
+      "color": "#FFA500",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Peeling_an_orange.jpg/640px-Peeling_an_orange.jpg"
+    },
+    {
+      "word": "stir",
+      "meaning": "To move a spoon around in a liquid or mixture to mix it together.",
+      "topics": ["Cooking"],
+      "color": "#DEB887",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Stirring_soup.jpg/640px-Stirring_soup.jpg"
+    },
+    {
+      "word": "mix",
+      "meaning": "To combine two or more ingredients together.",
+      "topics": ["Cooking"],
+      "color": "#FFD700",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Mixing_batter.jpg/640px-Mixing_batter.jpg"
+    },
+    {
+      "word": "pour",
+      "meaning": "To tip a container so that liquid flows out of it.",
+      "topics": ["Cooking"],
+      "color": "#87CEEB",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Pouring_milk.jpg/640px-Pouring_milk.jpg"
+    },
+    {
+      "word": "roast",
+      "meaning": "To cook food like meat or vegetables in an oven until browned.",
+      "topics": ["Cooking"],
+      "color": "#8B4513",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Roast_chicken.jpg/640px-Roast_chicken.jpg"
+    },
+    {
+      "word": "grill",
+      "meaning": "To cook food over direct heat, leaving dark grill marks on it.",
+      "topics": ["Cooking"],
+      "color": "#FF4500",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Grilling_meat.jpg/640px-Grilling_meat.jpg"
+    },
+    {
+      "word": "taste",
+      "meaning": "To put a small amount of food or drink in your mouth to check how it tastes.",
+      "topics": ["Cooking"],
+      "color": "#FF69B4",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Chef_tasting_food.jpg/640px-Chef_tasting_food.jpg"
+    },
+    {
+      "word": "serve",
+      "meaning": "To put food on plates and bring it to people to eat.",
+      "topics": ["Cooking"],
+      "color": "#FF8C00",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Serving_food.jpg/640px-Serving_food.jpg"
+    },
+    {
+      "word": "meal",
+      "meaning": "The food you eat at a particular time of day, such as breakfast, lunch, or dinner.",
+      "topics": ["Cooking"],
+      "color": "#FFA07A",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Family_meal.jpg/640px-Family_meal.jpg"
+    },
+    {
+      "word": "snack",
+      "meaning": "A small amount of food eaten between main meals.",
+      "topics": ["Cooking"],
+      "color": "#FFD700",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Snack_food.jpg/640px-Snack_food.jpg"
+    }
+  ]
+}
